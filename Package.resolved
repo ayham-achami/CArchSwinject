@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CArch",
+        "repositoryURL": "https://github.com/ayham-achami/CArch.git",
+        "state": {
+          "branch": "mainline",
+          "revision": "0fd5baf905a836029c1348f0c9db537176de305a",
+          "version": null
+        }
+      },
+      {
+        "package": "Swinject",
+        "repositoryURL": "https://github.com/Swinject/Swinject.git",
+        "state": {
+          "branch": null,
+          "revision": "b1d92a53159fe45e162c307183aec9be15e4e7ae",
+          "version": "2.8.0"
+        }
+      },
+      {
+        "package": "SwinjectStoryboard",
+        "repositoryURL": "https://github.com/Swinject/SwinjectStoryboard.git",
+        "state": {
+          "branch": null,
+          "revision": "a39bd7abe7e7427f9a0929a402cf2d1916fa5d50",
+          "version": "2.2.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
