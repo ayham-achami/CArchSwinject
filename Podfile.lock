@@ -1,6 +1,6 @@
 PODS:
   - CArch (1.0.0)
-  - SwiftLint (0.45.0)
+  - SwiftLint (0.45.1)
   - Swinject (2.7.1)
   - SwinjectStoryboard (2.2.2):
     - Swinject (~> 2.7.1)
@@ -12,7 +12,7 @@ DEPENDENCIES:
   - SwinjectStoryboard
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/CocoaPods/specs.git:
     - SwiftLint
     - Swinject
     - SwinjectStoryboard
@@ -24,12 +24,12 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CArch:
-    :commit: 0fd5baf905a836029c1348f0c9db537176de305a
+    :commit: 1e94c457361cbaaf181168172b42b39e165320e0
     :git: "git@github.com:ayham-achami/CArch.git"
 
 SPEC CHECKSUMS:
   CArch: 8e385adfd9744eae7ffa26a7c913a60a6c11fcf8
-  SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
+  SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   SwinjectStoryboard: 240ce371396da09a4c43c72ee5c148108500e184
 
