@@ -4,13 +4,13 @@ source 'https://github.com/CocoaPods/specs.git'
 install! 'cocoapods', :warn_for_unused_master_specs_repo => false
 
 # Uncomment the next line to define a global platform for your project
-platform :ios, '11.0'
+platform :ios, '13.0'
 
 def common_pods
   # Control
   pod 'SwiftLint'
   # Architecture
-  pod 'CArch', :git => 'git@github.com:ayham-achami/CArch.git', :branch => 'mainline'
+  pod 'CArch', :git => 'https://github.com/ayham-achami/CArch.git', :branch => 'mainline'
   # Dependency injection
   pod 'Swinject'
   pod 'SwinjectStoryboard'
@@ -34,10 +34,4 @@ target 'Playground' do
   # Common
   common_pods
   # Pods for Playground
-end
-
-post_install do |installer|
-  installer.pods_project.build_configurations.each do |config|
-    config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
-  end
 end

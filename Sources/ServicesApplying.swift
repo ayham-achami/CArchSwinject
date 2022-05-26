@@ -29,7 +29,7 @@ import Swinject
 /// Вспомогательный класс для регистрации сервисов в контейнер зависмотри
 class ServicesApplying: Assembly {
     
-    /// Модут доя собоки
+    /// Модуль для сборки 
     let assembly: DIAssembly
 
     /// Инициализации с любым модулем

@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
     }
     spec.frameworks   = ["Foundation", "UIKit"]
     spec.source_files = "Sources/**/*.swift"
-    spec.ios.deployment_target = "11.0"
+    spec.ios.deployment_target = "13.0"
     spec.requires_arc = true
     spec.swift_versions = ['5.0', '5.1']
     spec.pod_target_xcconfig = { "SWIFT_VERSION" => "5" }

@@ -45,9 +45,9 @@ public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {
     
     public init() {}
     
-    public func assembly<Module>(_ moduel: Module) -> Module where Module: LayoutModuleAssembly {
-        Self.provider.apply(LayoutModuleApplying(moduel))
-        return moduel
+    public func assembly<Module>(_ module: Module) -> Module where Module: LayoutModuleAssembly {
+        Self.provider.apply(LayoutModuleApplying(module))
+        return module
     }
     
     public func record<Recorder>(_ recorder: Recorder.Type) where Recorder: ServicesRecorder {

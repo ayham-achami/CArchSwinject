@@ -26,10 +26,10 @@
 import CArch
 import Swinject
 
-/// Вспомогательный класс для регистрации моудла в контейнер зависмотри
+/// Вспомогательный класс для регистрации модуля в контейнер зависимости
 class LayoutModuleApplying: Assembly {
     
-    /// Модут доя собоки
+    /// Модуль для сборки
     let moduleAssembly: LayoutModuleAssembly
 
     /// Инициализации с любым модулем

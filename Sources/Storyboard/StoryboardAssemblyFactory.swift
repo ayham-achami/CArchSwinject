@@ -51,9 +51,9 @@ public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, S
     
     public required override init() {}
     
-    public func assembly<Module>(_ moduel: Module) -> Module where Module: StoryboardModuleAssembly {
-        Self.provider.apply(StoryboardModuleApplying(moduel))
-        return moduel
+    public func assembly<Module>(_ module: Module) -> Module where Module: StoryboardModuleAssembly {
+        Self.provider.apply(StoryboardModuleApplying(module))
+        return module
     }
     
     public func record<Recorder>(_ recorder: Recorder.Type) where Recorder: ServicesRecorder {
@@ -67,8 +67,10 @@ extension SwinjectStoryboard {
     @objc
     class func setup() {
         StoryboardAssemblyFactory.provider = .init(.init(container: defaultContainer))
-        guard StoryboardAssemblyFactory.conforms(to: SwinjectStoryboardProtocol.self),
-              StoryboardAssemblyFactory.responds(to: #selector(setup)) else { return }
+        guard
+            StoryboardAssemblyFactory.conforms(to: SwinjectStoryboardProtocol.self),
+            StoryboardAssemblyFactory.responds(to: #selector(setup))
+        else { return }
         StoryboardAssemblyFactory.perform(#selector(setup))
     }
 }

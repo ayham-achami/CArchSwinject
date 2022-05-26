@@ -26,10 +26,10 @@
 import CArch
 import Swinject
 
-/// Вспомогательный класс для регистрации моудла в контейнер зависмотри
+/// Вспомогательный класс для регистрации модуля в контейнер зависимости
 class StoryboardModuleApplying: Assembly {
     
-    /// Модуль доя сборки
+    /// Модуль для сборки
     let moduleAssembly: StoryboardModuleAssembly
 
     /// Инициализации с любым модулем
