@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
         :tag => spec.version.to_s
     }
     spec.frameworks   = ["Foundation", "UIKit"]
-    spec.source_files = "Sources/**/*.swift"
+    spec.source_files = "Sources/**/*.{swift,h,m}"
     spec.ios.deployment_target = "13.0"
     spec.requires_arc = true
     spec.swift_versions = ['5.0', '5.1']
@@ -21,5 +21,4 @@ Pod::Spec.new do |spec|
     spec.pod_target_xcconfig = { 'APPLICATION_EXTENSION_API_ONLY' => 'YES' }
     spec.dependency 'CArch'
     spec.dependency 'Swinject'
-    spec.dependency 'SwinjectStoryboard'
 end

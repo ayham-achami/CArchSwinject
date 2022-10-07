@@ -1,5 +1,5 @@
 //
-//  LayoutAssemblyFactory.swift
+//  SwinjectStoryboard+SetUp.m
 //
 //  The MIT License (MIT)
 //
@@ -23,34 +23,26 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import CArch
-import Swinject
+#import <Foundation/Foundation.h>
+#import <CArchSwinject/SwinjectStoryboardProtocol.h>
 
-/// Фабрика создания и внедрение зависимости
-public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {
-    
-    static var provider = SwinjectProvider(.init())
-    
-    public var layoutContainer: DIContainer {
-        Self.provider.container
-    }
-    
-    public var registrar: DIRegistrar {
-        Self.provider.container
-    }
-    
-    public var resolver: DIResolver {
-        Self.provider.container
-    }
-    
-    public init() {}
-    
-    public func assembly<Module>(_ module: Module) -> Module where Module: LayoutModuleAssembly {
-        Self.provider.apply(LayoutModuleApplying(module))
-        return module
-    }
-    
-    public func record<Recorder>(_ recorder: Recorder.Type) where Recorder: ServicesRecorder {
-        recorder.init().records.forEach { Self.provider.apply(ServicesApplying($0)) }
+#if __has_include(<CArchSwinject/CArchSwinject-Swift.h>)
+    #import <CArchSwinject/CArchSwinject-Swift.h>
+#elif __has_include("CArchSwinject-Swift.h")
+    #import "CArchSwinject-Swift.h"
+#endif
+
+@interface SwinjectStoryboard (SetUp)
+
+@end
+
+@implementation SwinjectStoryboard (SetUp)
+
+@end
+
+__attribute__((constructor)) static void swinjectStoryboardSetupEntry(void) {
+    if ([SwinjectStoryboard conformsToProtocol:@protocol(SwinjectStoryboardProtocol)] &&
+        [SwinjectStoryboard respondsToSelector:@selector(setup)]) {
+        [SwinjectStoryboard performSelector:@selector(setup)];
     }
 }

@@ -26,14 +26,13 @@
 import CArch
 import Swinject
 import Foundation
-import SwinjectStoryboard
 
 /// Фабрика создания и внедрение зависимости
 public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, SwinjectStoryboardProtocol {
     
     static var provider = SwinjectProvider(.init())
 
-    public var container: DIStoryboardContainer {
+    public var storyboardContainer: DIStoryboardContainer {
         Self.provider.container
     }
     
@@ -65,7 +64,7 @@ public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, S
 extension SwinjectStoryboard {
 
     @objc
-    class func setup() {
+    public class func setup() {
         StoryboardAssemblyFactory.provider = .init(.init(container: defaultContainer))
         guard
             StoryboardAssemblyFactory.conforms(to: SwinjectStoryboardProtocol.self),

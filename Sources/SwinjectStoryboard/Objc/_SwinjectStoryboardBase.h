@@ -1,5 +1,5 @@
 //
-//  LayoutAssemblyFactory.swift
+//  _SwinjectStoryboardBase.h
 //
 //  The MIT License (MIT)
 //
@@ -23,34 +23,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import CArch
-import Swinject
+#import <UIKit/UIKit.h>
 
-/// Фабрика создания и внедрение зависимости
-public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {
-    
-    static var provider = SwinjectProvider(.init())
-    
-    public var layoutContainer: DIContainer {
-        Self.provider.container
-    }
-    
-    public var registrar: DIRegistrar {
-        Self.provider.container
-    }
-    
-    public var resolver: DIResolver {
-        Self.provider.container
-    }
-    
-    public init() {}
-    
-    public func assembly<Module>(_ module: Module) -> Module where Module: LayoutModuleAssembly {
-        Self.provider.apply(LayoutModuleApplying(module))
-        return module
-    }
-    
-    public func record<Recorder>(_ recorder: Recorder.Type) where Recorder: ServicesRecorder {
-        recorder.init().records.forEach { Self.provider.apply(ServicesApplying($0)) }
-    }
-}
+/// The base class of `SwinjectStoryboard`, which should not be used directly in your app.
+@interface _SwinjectStoryboardBase : UIStoryboard
+
+/// The factory method, which should not be used directly in your app.
++ (nonnull instancetype)_create:(nonnull NSString *)name bundle:(nullable NSBundle *)storyboardBundleOrNil;
+
+@end

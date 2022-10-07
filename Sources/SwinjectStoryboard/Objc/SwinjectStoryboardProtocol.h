@@ -1,5 +1,5 @@
 //
-//  LayoutAssemblyFactory.swift
+//  SwinjectStoryboardProtocol.h
 //
 //  The MIT License (MIT)
 //
@@ -23,34 +23,31 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import CArch
-import Swinject
+// Objective-C optional protocol method is used instead of protocol extension to workaround the issue that
+// default implementation of a protocol method is always called if a class method conforming the protocol
+// is defined as an extension in a different framework.
+@protocol SwinjectStoryboardProtocol
 
-/// Фабрика создания и внедрение зависимости
-public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {
-    
-    static var provider = SwinjectProvider(.init())
-    
-    public var layoutContainer: DIContainer {
-        Self.provider.container
-    }
-    
-    public var registrar: DIRegistrar {
-        Self.provider.container
-    }
-    
-    public var resolver: DIResolver {
-        Self.provider.container
-    }
-    
-    public init() {}
-    
-    public func assembly<Module>(_ module: Module) -> Module where Module: LayoutModuleAssembly {
-        Self.provider.apply(LayoutModuleApplying(module))
-        return module
-    }
-    
-    public func record<Recorder>(_ recorder: Recorder.Type) where Recorder: ServicesRecorder {
-        recorder.init().records.forEach { Self.provider.apply(ServicesApplying($0)) }
-    }
-}
+@optional
+/// Called by Swinject framework once before SwinjectStoryboard is instantiated.
+///
+/// - Note:
+///   Implement this method and setup the default container if you implicitly instantiate UIWindow
+///   and its root view controller from "Main" storyboard.
+///
+/// ```swift
+/// extension SwinjectStoryboard {
+///     @objc class func setup() {
+///         let container = defaultContainer
+///         container.register(SomeType.self) { _ in
+///             SomeClass()
+///         }
+///         container.storyboardInitCompleted(ViewController.self) { r, c in
+///             c.something = r.resolve(SomeType.self)
+///         }
+///     }
+/// }
+/// ```
++ (void)setup;
+
+@end

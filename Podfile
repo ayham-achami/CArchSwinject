@@ -13,7 +13,6 @@ def common_pods
   pod 'CArch', :git => 'https://github.com/ayham-achami/CArch.git', :branch => 'mainline'
   # Dependency injection
   pod 'Swinject'
-  pod 'SwinjectStoryboard'
 end
 
 target 'CArchSwinject' do

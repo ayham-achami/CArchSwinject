@@ -69,22 +69,22 @@ extension Container: DIRegistrar {
 extension Container: DIResolver {
 
     public func unravel<Service>(_ serviceType: Service.Type) -> Service? {
-        return resolve(serviceType)
+        synchronize().resolve(serviceType)
     }
 
     public func unravel<Service>(_ serviceType: Service.Type, name: String?) -> Service? {
-        return resolve(serviceType, name: name)
+        synchronize().resolve(serviceType, name: name)
     }
 
     public func unravel<Service, Arg>(_ serviceType: Service.Type, argument: Arg) -> Service? {
-        return resolve(serviceType, argument: argument)
+        synchronize().resolve(serviceType, argument: argument)
     }
 
     public func unravel<Service, Arg1, Arg2>(_ serviceType: Service.Type, arguments: Arg1, _ arg2: Arg2) -> Service? {
-        return resolve(serviceType, arguments: arguments, arg2)
+        synchronize().resolve(serviceType, arguments: arguments, arg2)
     }
 
     public func unravel<Service, Arg1, Arg2, Arg3>(_ serviceType: Service.Type, arguments: Arg1, _ arg2: Arg2, arg3: Arg3) -> Service? {
-        return resolve(serviceType, arguments: arguments, arg2, arg3)
+        synchronize().resolve(serviceType, arguments: arguments, arg2, arg3)
     }
 }
