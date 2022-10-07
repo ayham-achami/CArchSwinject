@@ -1,5 +1,5 @@
 //
-//  LayoutAssemblyFactory.swift
+//  SwinjectStoryboardOption.swift
 //
 //  The MIT License (MIT)
 //
@@ -23,34 +23,28 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import CArch
 import Swinject
 
-/// Фабрика создания и внедрение зависимости
-public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {
+#if os(iOS) || os(OSX) || os(tvOS)
+struct SwinjectStoryboardOption: ServiceKeyOption {
+
+    let controllerType: String
     
-    static var provider = SwinjectProvider(.init())
-    
-    public var layoutContainer: DIContainer {
-        Self.provider.container
+    init(controllerType: Container.Controller.Type) {
+        self.controllerType = String(reflecting: controllerType)
     }
     
-    public var registrar: DIRegistrar {
-        Self.provider.container
+    var description: String {
+        return "Storyboard: \(controllerType)"
     }
     
-    public var resolver: DIResolver {
-        Self.provider.container
+    func hash(into: inout Hasher) {
+        controllerType.hash(into: &into)
     }
     
-    public init() {}
-    
-    public func assembly<Module>(_ module: Module) -> Module where Module: LayoutModuleAssembly {
-        Self.provider.apply(LayoutModuleApplying(module))
-        return module
-    }
-    
-    public func record<Recorder>(_ recorder: Recorder.Type) where Recorder: ServicesRecorder {
-        recorder.init().records.forEach { Self.provider.apply(ServicesApplying($0)) }
+    func isEqualTo(_ another: ServiceKeyOption) -> Bool {
+        guard let another = another as? SwinjectStoryboardOption else { return false }
+        return self.controllerType == another.controllerType
     }
 }
+#endif
