@@ -1,5 +1,5 @@
 //
-//  SwinjectStoryboard+StoryboardReference.
+//  SwinjectStoryboard+StoryboardReference.swift
 //
 //  The MIT License (MIT)
 //
@@ -24,32 +24,31 @@
 //  SOFTWARE.
 
 import Foundation
+#if canImport(UIKit)
+    import UIKit
+#elseif canImport(Cocoa)
+    import Cocoa
+#endif
 
-private var storyboardStack = [SwinjectStoryboard]()
+internal extension SwinjectStoryboard {
 
-extension SwinjectStoryboard {
-
-    class var isCreatingStoryboardReference: Bool {
-        referencingStoryboard != nil
-    }
-
-    static var referencingStoryboard: SwinjectStoryboard? {
-        storyboardStack.last
-    }
-    
     static func pushInstantiatingStoryboard(_ storyboard: SwinjectStoryboard) {
         storyboardStack.append(storyboard)
     }
 
     @discardableResult
     static func popInstantiatingStoryboard() -> SwinjectStoryboard? {
-        storyboardStack.popLast()
+        return storyboardStack.popLast()
     }
-}
 
+    class var isCreatingStoryboardReference: Bool {
+        return referencingStoryboard != nil
+    }
+
+    static var referencingStoryboard: SwinjectStoryboard? {
+        return storyboardStack.last
+    }
 #if os(iOS) || os(tvOS)
-extension SwinjectStoryboard {
-    
     class func createReferenced(name: String, bundle storyboardBundleOrNil: Bundle?) -> SwinjectStoryboard {
         if let container = referencingStoryboard?.container.value {
             return create(name: name, bundle: storyboardBundleOrNil, container: container)
@@ -57,10 +56,7 @@ extension SwinjectStoryboard {
             return create(name: name, bundle: storyboardBundleOrNil)
         }
     }
-}
 #elseif os(OSX)
-extension SwinjectStoryboard {
-    
     class func createReferenced(name: NSStoryboard.Name, bundle storyboardBundleOrNil: Bundle?) -> SwinjectStoryboard {
         if let container = referencingStoryboard?.container.value {
             return create(name: name, bundle: storyboardBundleOrNil, container: container)
@@ -68,5 +64,7 @@ extension SwinjectStoryboard {
             return create(name: name, bundle: storyboardBundleOrNil)
         }
     }
-}
 #endif
+}
+
+private var storyboardStack = [SwinjectStoryboard]()

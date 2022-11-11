@@ -25,7 +25,6 @@
 
 import Foundation
 
-@objc protocol InjectionVerifiable: AnyObject {
-    
+@objc internal protocol InjectionVerifiable: AnyObject {
     var wasInjected: Bool { get set }
 }

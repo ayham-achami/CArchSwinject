@@ -1,5 +1,5 @@
 //
-//  SwinjectStoryboardOption.swift
+//  SwinjectStoryboard+SetUp.swift
 //
 //  The MIT License (MIT)
 //
@@ -23,30 +23,15 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import Swinject
+#import <Foundation/Foundation.h>
 
-#if os(iOS) || os(OSX) || os(tvOS)
-internal struct SwinjectStoryboardOption: ServiceKeyOption {
-    internal let controllerType: String
-    
-    internal init(controllerType: Container.Controller.Type) {
-        self.controllerType = String(reflecting: controllerType)
+__attribute__((constructor)) static void swinjectStoryboardSetupEntry(void) {
+    Class swinjectStoryboard = NSClassFromString(@"SwinjectStoryboard");
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    if ([swinjectStoryboard respondsToSelector:@selector(configure)]) {
+        [swinjectStoryboard performSelector:@selector(configure)];
     }
-    
-    internal func isEqualTo(_ another: ServiceKeyOption) -> Bool {
-        guard let another = another as? SwinjectStoryboardOption else {
-            return false
-        }
-        
-        return self.controllerType == another.controllerType
-    }
-    
-    internal var description: String {
-        return "Storyboard: \(controllerType)"
-    }
-    
-    func hash(into: inout Hasher) {
-        into.combine(controllerType)
-    }
+#pragma clang diagnostic pop
 }
-#endif
+

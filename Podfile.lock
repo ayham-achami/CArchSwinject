@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CArch:
-    :commit: 0f617410d2ad45782a525ef83f64324f33a30b3e
+    :commit: 36ef9d744f90bff78163e77bcc8a38cdfcd8156e
     :git: https://github.com/ayham-achami/CArch.git
 
 SPEC CHECKSUMS:
@@ -30,4 +30,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1b43cea8f17df264181d306599d8a5abfdb60bc3
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.3

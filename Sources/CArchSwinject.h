@@ -33,6 +33,3 @@ FOUNDATION_EXPORT const unsigned char CArchSwinjectVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <CArchSwinject/PublicHeader.h>
 
-#import <CArchSwinject/_SwinjectStoryboardBase.h>
-#import <CArchSwinject/SwinjectStoryboardProtocol.h>
-
