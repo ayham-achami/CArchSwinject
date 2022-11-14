@@ -1,5 +1,5 @@
 //
-//  UIStoryboard+Swizzling.h
+//  UnavailableItems.swift
 //
 //  The MIT License (MIT)
 //
@@ -23,8 +23,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <UIKit/UIKit.h>
-
-@interface UIStoryboard (Swizzling)
-
-@end
+// MARK: For auto migration to Swinject v1.
+@available(*, unavailable, renamed: "SwinjectStoryboardProtocol")
+public protocol SwinjectStoryboardType { }

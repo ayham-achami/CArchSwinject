@@ -1,5 +1,5 @@
 //
-//  _SwinjectStoryboardBase.h
+//  SwinjectStoryboardBase(OSX).swift
 //
 //  The MIT License (MIT)
 //
@@ -23,12 +23,33 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#if canImport(Cocoa) && !targetEnvironment(macCatalyst)
+import Cocoa
+import Swinject
 
-/// The base class of `SwinjectStoryboard`, which should not be used directly in your app.
-@interface _SwinjectStoryboardBase : UIStoryboard
+@objcMembers
+public class SwinjectStoryboardBase: NSStoryboard {
+    
+    public class func create(_ name: String, bundle storyboardBundleOrNil: Bundle?) -> Self {
+        let storyboard = perform(#selector(NSStoryboard.init(name:bundle:)), with: name, with: storyboardBundleOrNil)?
+            .takeUnretainedValue()
+        // swiftlint:disable:next force_cast
+        return storyboard as! Self
+    }
+}
 
-/// The factory method, which should not be used directly in your app.
-+ (nonnull instancetype)_create:(nonnull NSString *)name bundle:(nullable NSBundle *)storyboardBundleOrNil;
+extension SwinjectStoryboard {
+    
+    @objc public static func configure() {
+        NSStoryboard.swizzling()
+        DispatchQueue.once(token: "swinject.storyboard.setup") {
+            guard SwinjectStoryboard.responds(to: _Selector("setup")) else { return }
+            SwinjectStoryboard.perform(_Selector("setup"))
+        }
+    }
 
-@end
+    static func _Selector(_ str: String) -> Selector {
+        return Selector(str)
+    }
+}
+#endif

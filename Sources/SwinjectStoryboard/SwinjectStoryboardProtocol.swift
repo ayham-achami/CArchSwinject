@@ -1,5 +1,5 @@
 //
-//  SwinjectStoryboard+SetUp.m
+//  SwinjectStoryboardProtocol.swift
 //
 //  The MIT License (MIT)
 //
@@ -23,26 +23,31 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import <CArchSwinject/SwinjectStoryboardProtocol.h>
+import Foundation
 
-#if __has_include(<CArchSwinject/CArchSwinject-Swift.h>)
-    #import <CArchSwinject/CArchSwinject-Swift.h>
-#elif __has_include("CArchSwinject-Swift.h")
-    #import "CArchSwinject-Swift.h"
-#endif
+@objc
+public protocol SwinjectStoryboardProtocol {
 
-@interface SwinjectStoryboard (SetUp)
-
-@end
-
-@implementation SwinjectStoryboard (SetUp)
-
-@end
-
-__attribute__((constructor)) static void swinjectStoryboardSetupEntry(void) {
-    if ([SwinjectStoryboard conformsToProtocol:@protocol(SwinjectStoryboardProtocol)] &&
-        [SwinjectStoryboard respondsToSelector:@selector(setup)]) {
-        [SwinjectStoryboard performSelector:@selector(setup)];
-    }
+    /// Called by Swinject framework once before SwinjectStoryboard is instantiated.
+    ///
+    /// - Note:
+    ///   Implement this method and setup the default container if you implicitly instantiate UIWindow
+    ///   and its root view controller from "Main" storyboard.
+    ///
+    /// ```swift
+    /// extension SwinjectStoryboard {
+    ///     @objc class func setup() {
+    ///         let container = defaultContainer
+    ///         container.register(SomeType.self) {
+    ///             _ in
+    ///             SomeClass()
+    ///         }
+    ///         container.storyboardInitCompleted(ViewController.self) {
+    ///             r, c in
+    ///             c.something = r.resolve(SomeType.self)
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    @objc optional static func setup()
 }

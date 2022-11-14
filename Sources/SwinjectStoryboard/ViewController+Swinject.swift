@@ -25,100 +25,72 @@
 
 import ObjectiveC
 
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
 import UIKit
 
-private var uivcWasInjectedKey = "UIViewController.wasInjected"
-private var uivcRegistrationNameKey = "UIViewController.swinjectRegistrationName"
+private var uivcRegistrationNameKey: String = "UIViewController.swinjectRegistrationName"
+private var uivcWasInjectedKey: String = "UIViewController.wasInjected"
 
-// MARK: - UIViewController + RegistrationNameAssociatable + InjectionVerifiable
 extension UIViewController: RegistrationNameAssociatable, InjectionVerifiable {
-    
-    var swinjectRegistrationName: String? {
-        get {
-            getAssociatedString(key: &uivcRegistrationNameKey)
-        }
-        set {
-            setAssociatedString(newValue, key: &uivcRegistrationNameKey)
-        }
+    public var swinjectRegistrationName: String? {
+        get { return getAssociatedString(key: &uivcRegistrationNameKey) }
+        set { setAssociatedString(newValue, key: &uivcRegistrationNameKey) }
     }
 
-    var wasInjected: Bool {
-        get {
-            getAssociatedBool(key: &uivcWasInjectedKey) ?? false
-        }
-        set {
-            setAssociatedBool(newValue, key: &uivcWasInjectedKey)
-        }
+    public var wasInjected: Bool {
+        get { return getAssociatedBool(key: &uivcWasInjectedKey) ?? false }
+        set { setAssociatedBool(newValue, key: &uivcWasInjectedKey) }
     }
 }
-#elseif os(OSX)
-private var nsvcWasInjectedKey = "NSViewController.wasInjected"
-private var nswcWasInjectedKey = "NSWindowController.wasInjected"
-private var nsvcRegistrationNameKey = "NSViewController.swinjectRegistrationName"
-private var nswcRegistrationNameKey = "NSWindowController.swinjectRegistrationName"
 
-// MARK: - NSViewController + RegistrationNameAssociatable + InjectionVerifiable
+#elseif canImport(Cocoa)
+import Cocoa
+
+private var nsvcRegistrationNameKey: String = "NSViewController.swinjectRegistrationName"
+private var nswcRegistrationNameKey: String = "NSWindowController.swinjectRegistrationName"
+private var nsvcWasInjectedKey: String = "NSViewController.wasInjected"
+private var nswcWasInjectedKey: String = "NSWindowController.wasInjected"
+
 extension NSViewController: RegistrationNameAssociatable, InjectionVerifiable {
-    
-    var swinjectRegistrationName: String? {
-        get {
-            getAssociatedString(key: &nsvcRegistrationNameKey)
-        }
-        set {
-            setAssociatedString(newValue, key: &nsvcRegistrationNameKey)
-        }
+    internal var swinjectRegistrationName: String? {
+        get { return getAssociatedString(key: &nsvcRegistrationNameKey) }
+        set { setAssociatedString(newValue, key: &nsvcRegistrationNameKey) }
     }
 
-    var wasInjected: Bool {
-        get {
-            getAssociatedBool(key: &nsvcWasInjectedKey) ?? false
-        }
-        set {
-            setAssociatedBool(newValue, key: &nsvcWasInjectedKey)
-        }
+    internal var wasInjected: Bool {
+        get { return getAssociatedBool(key: &nsvcWasInjectedKey) ?? false }
+        set { setAssociatedBool(newValue, key: &nsvcWasInjectedKey) }
     }
 }
 
-// MARK: - NSWindowController + RegistrationNameAssociatable + InjectionVerifiable
 extension NSWindowController: RegistrationNameAssociatable, InjectionVerifiable {
-    
-    var swinjectRegistrationName: String? {
-        get {
-            getAssociatedString(key: &nsvcRegistrationNameKey)
-        }
-        set {
-            setAssociatedString(newValue, key: &nsvcRegistrationNameKey)
-        }
+    internal var swinjectRegistrationName: String? {
+        get { return getAssociatedString(key: &nsvcRegistrationNameKey) }
+        set { setAssociatedString(newValue, key: &nsvcRegistrationNameKey) }
     }
 
-    var wasInjected: Bool {
-        get {
-            getAssociatedBool(key: &nswcWasInjectedKey) ?? false
-        }
-        set {
-            setAssociatedBool(newValue, key: &nswcWasInjectedKey)
-        }
+    internal var wasInjected: Bool {
+        get { return getAssociatedBool(key: &nswcWasInjectedKey) ?? false }
+        set { setAssociatedBool(newValue, key: &nswcWasInjectedKey) }
     }
 }
+
 #endif
 
-// MARK: - NSObject + Associated
 extension NSObject {
-    
-    func getAssociatedString(key: UnsafeRawPointer) -> String? {
-        objc_getAssociatedObject(self, key) as? String
+    fileprivate func getAssociatedString(key: UnsafeRawPointer) -> String? {
+        return objc_getAssociatedObject(self, key) as? String
     }
 
-    func setAssociatedString(_ string: String?, key: UnsafeRawPointer) {
+    fileprivate func setAssociatedString(_ string: String?, key: UnsafeRawPointer) {
         objc_setAssociatedObject(self, key, string, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
     }
 
-    func getAssociatedBool(key: UnsafeRawPointer) -> Bool? {
-        (objc_getAssociatedObject(self, key) as? NSNumber)?.boolValue
+    fileprivate func getAssociatedBool(key: UnsafeRawPointer) -> Bool? {
+        return (objc_getAssociatedObject(self, key) as? NSNumber)?.boolValue
     }
     
-    func setAssociatedBool(_ bool: Bool, key: UnsafeRawPointer) {
+    fileprivate func setAssociatedBool(_ bool: Bool, key: UnsafeRawPointer) {
         objc_setAssociatedObject(self, key, NSNumber(value: bool), objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
     }
 }

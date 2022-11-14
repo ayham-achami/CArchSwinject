@@ -23,10 +23,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
+    import UIKit
+#endif
 import Swinject
 
 #if os(iOS) || os(OSX) || os(tvOS)
-// swiftlint:disable: void_return
 extension Container {
     /// Adds a registration of the specified view or window controller that is configured in a storyboard.
     ///
@@ -40,32 +42,28 @@ extension Container {
     ///                     that have the same view or window controller type.
     ///   - initCompleted:  A closure to specify how the dependencies of the view or window controller are injected.
     ///                     It is invoked by the `Container` when the view or window controller is instantiated by `SwinjectStoryboard`.
-    public func storyboardInitCompleted<C: Controller>(_ controllerType: C.Type, name: String? = nil,
-                                                       initCompleted: @escaping (Resolver, C) -> ()) {
+    public func storyboardInitCompleted<C: Controller>(_ controllerType: C.Type, name: String? = nil, initCompleted: @escaping (Resolver, C) -> Void) {
         // Xcode 7.1 workaround for Issue #10. This workaround is not necessary with Xcode 7.
         // https://github.com/Swinject/Swinject/issues/10
         let factory = { (_: Resolver, controller: Controller) in controller }
         // swiftlint:disable:next force_cast
-        let wrappingClosure: (Resolver, Controller) -> () = { r, c in initCompleted(r, c as! C) }
+        let wrappingClosure: (Resolver, Controller) -> Void = { r, c in initCompleted(r, c as! C) }
         let option = SwinjectStoryboardOption(controllerType: controllerType)
         _register(Controller.self, factory: factory, name: name, option: option)
             .initCompleted(wrappingClosure)
     }
 }
-// swiftlint:enable void_return
 #endif
 
+extension Container {
 #if os(iOS) || os(tvOS)
-extension Container {
-    
-    /// The UIViewController.
+    /// The typealias to UIViewController.
     public typealias Controller = UIViewController
-}
-#elseif os(OSX)
-extension Container {
     
-    /// AnyObject, which should be actually NSViewController or NSWindowController.
+#elseif os(OSX)
+    /// The typealias to AnyObject, which should be actually NSViewController or NSWindowController.
     /// See the reference of NSStoryboard.instantiateInitialController method.
     public typealias Controller = Any
-}
+    
 #endif
+}

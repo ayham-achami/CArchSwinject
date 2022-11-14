@@ -25,7 +25,6 @@
 
 import Foundation
 
-@objc protocol RegistrationNameAssociatable: AnyObject {
-    
+@objc internal protocol RegistrationNameAssociatable: AnyObject {
     var swinjectRegistrationName: String? { get set }
 }

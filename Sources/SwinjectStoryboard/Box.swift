@@ -25,11 +25,10 @@
 
 import Foundation
 
-final class Box<T> {
-    
-    let value: T
+internal final class Box<T> {
+    internal let value: T
 
-    init(_ value: T) {
+    internal init(_ value: T) {
         self.value = value
     }
 }

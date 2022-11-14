@@ -1,5 +1,5 @@
 //
-//  _SwinjectStoryboardBase.m
+//  SwinjectStoryboardBase(iOS-tvOS).swift
 //
 //  The MIT License (MIT)
 //
@@ -23,12 +23,33 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import "_SwinjectStoryboardBase.h"
+#if canImport(UIKit)
+import UIKit
+import Swinject
 
-@implementation _SwinjectStoryboardBase
-
-+ (nonnull instancetype)_create:(nonnull NSString *)name bundle:(nullable NSBundle *)storyboardBundleOrNil {
-    return (id)[self storyboardWithName:name bundle:storyboardBundleOrNil];
+@objcMembers
+public class SwinjectStoryboardBase: UIStoryboard {
+    
+    public class func create(_ name: String, bundle storyboardBundleOrNil: Bundle?) -> Self {
+        let storyboard = perform(#selector(UIStoryboard.init(name:bundle:)), with: name, with: storyboardBundleOrNil)?
+            .takeUnretainedValue()
+        // swiftlint:disable:next force_cast
+        return storyboard as! Self
+    }
 }
 
-@end
+extension SwinjectStoryboard {
+    
+    @objc public static func configure() {
+        UIStoryboard.swizzling()
+        DispatchQueue.once(token: "swinject.storyboard.setup") {
+            guard SwinjectStoryboard.responds(to: _Selector("setup")) else { return }
+            SwinjectStoryboard.perform(_Selector("setup"))
+        }
+    }
+
+    static func _Selector(_ str: String) -> Selector {
+        return Selector(str)
+    }
+}
+#endif
