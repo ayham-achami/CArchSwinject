@@ -26,6 +26,7 @@
 import CArch
 import UIKit
 import Swinject
+import SwinjectStoryboard
 
 // MARK: - Container + DIStoryboard
 extension Container: DIStoryboard {

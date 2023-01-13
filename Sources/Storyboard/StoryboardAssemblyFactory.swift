@@ -26,6 +26,7 @@
 import CArch
 import Swinject
 import Foundation
+import SwinjectStoryboard
 
 /// Фабрика создания и внедрение зависимости
 public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, SwinjectStoryboardProtocol {

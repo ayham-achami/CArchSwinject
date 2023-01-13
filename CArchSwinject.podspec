@@ -21,4 +21,5 @@ Pod::Spec.new do |spec|
     spec.pod_target_xcconfig = { 'APPLICATION_EXTENSION_API_ONLY' => 'YES' }
     spec.dependency 'CArch'
     spec.dependency 'Swinject'
+    spec.dependency 'SwinjectStoryboard'
 end
