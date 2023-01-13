@@ -27,7 +27,7 @@ import CArch
 import Swinject
 
 /// Фабрика создания и внедрение зависимости
-public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {
+public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {    
     
     static var provider = SwinjectProvider(.init())
     
