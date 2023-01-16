@@ -24,7 +24,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CArch:
-    :commit: 36ef9d744f90bff78163e77bcc8a38cdfcd8156e
+    :commit: 88477e31d28046a85eefeccabafcf84fb642dfac
     :git: https://github.com/ayham-achami/CArch.git
 
 SPEC CHECKSUMS:
