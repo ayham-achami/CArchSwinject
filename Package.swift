@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(name: "CArchSwinject",
                       // platforms
-                      platforms: [.iOS(.v11)],
+                      platforms: [.iOS(.v13)],
                       // Products
                       products: [.library(name: "CArchSwinject", targets: ["CArchSwinject"])],
                       // Dependencies
