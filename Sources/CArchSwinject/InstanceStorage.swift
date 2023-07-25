@@ -35,7 +35,7 @@ final class SingletonStorageFactory: InstanceStorage {
 
     public var instance: Any? {
         get {
-            return strongReference?.wrapped
+            strongReference?.wrapped
         }
         set {
             if let newValue = newValue as AnyObject? {
@@ -56,7 +56,7 @@ final class AutoReleaseStorageFactory: InstanceStorage {
 
     public var instance: Any? {
         get {
-            return weakReference?.wrapped
+            weakReference?.wrapped
         }
         set {
             if let newValue = newValue as AnyObject? {

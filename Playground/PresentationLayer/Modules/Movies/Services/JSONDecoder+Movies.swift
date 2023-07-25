@@ -1,6 +1,3 @@
-//
-//  LayoutModuleApplying.swift
-//
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2019 Community Arch
@@ -23,26 +20,35 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import CArch
-import Swinject
+import Foundation
 
-/// Вспомогательный класс для регистрации модуля в контейнер зависимости
-class LayoutModuleApplying: Assembly {
+private let formatter: ISO8601DateFormatter = {
+    .init()
+}()
+
+extension JSONDecoder {
     
-    /// Модуль для сборки
-    let moduleAssembly: LayoutModuleAssembly
-
-    /// Инициализации с любым модулем
-    ///
-    /// - Parameter anyModuleAssembly: Любой модуль
-    init(_ moduleAssembly: LayoutModuleAssembly) {
-        self.moduleAssembly = moduleAssembly
+    enum Error: Swift.Error {
+        
+        case parsing
     }
-
-    func assemble(container: Container) {
-        moduleAssembly.registerView(in: container)
-        moduleAssembly.registerPresenter(in: container)
-        moduleAssembly.registerProvider(in: container)
-        moduleAssembly.registerRouter(in: container)
-    }
+    
+    static let `default`: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .custom { (decoder) -> Date in
+            let container = try decoder.singleValueContainer()
+            let dateString = try container.decode(String.self)
+            formatter.formatOptions = [.withInternetDateTime]
+            if let date = formatter.date(from: dateString) {
+                return date
+            }
+            formatter.formatOptions = [.withFullDate, .withDashSeparatorInDate]
+            if let date = formatter.date(from: dateString) {
+                return date
+            }
+            throw Error.parsing
+        }
+        return decoder
+    }()
 }

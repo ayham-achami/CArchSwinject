@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,27 +16,41 @@
 		8E90F79206FC967AE2CF242E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE842558B939091CD28F6E5 /* MainView.swift */; };
 		99CE846A3A9E69196B49B861 /* MainAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD186A6BC1F656AF88FE9232 /* MainAssembly.swift */; };
 		A8C8F76A66EFBCA1B251C217 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2C8F11D3A81928212190B /* MainRouter.swift */; };
-		CBD5F75EFDA8D4EEDBBBF5C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D98713FA04EDD7ED8CD88DB /* Main.storyboard */; };
+		DF032C7E2A70387800237CC7 /* InstanceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C6C2A70387800237CC7 /* InstanceStorage.swift */; };
+		DF032C7F2A70387800237CC7 /* CArchSwinject.h in Headers */ = {isa = PBXBuildFile; fileRef = DF032C6D2A70387800237CC7 /* CArchSwinject.h */; };
+		DF032C802A70387800237CC7 /* UnsafeInjectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C6E2A70387800237CC7 /* UnsafeInjectable.swift */; };
+		DF032C812A70387800237CC7 /* ServicesApplying.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C6F2A70387800237CC7 /* ServicesApplying.swift */; };
+		DF032C822A70387800237CC7 /* Container+DIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C712A70387800237CC7 /* Container+DIStoryboard.swift */; };
+		DF032C832A70387800237CC7 /* UIViewController+SMA.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C722A70387800237CC7 /* UIViewController+SMA.swift */; };
+		DF032C842A70387800237CC7 /* StoryboardModuleApplying.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C732A70387800237CC7 /* StoryboardModuleApplying.swift */; };
+		DF032C852A70387800237CC7 /* StoryboardAssemblyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C742A70387800237CC7 /* StoryboardAssemblyFactory.swift */; };
+		DF032C862A70387800237CC7 /* LayoutAssemblyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C762A70387800237CC7 /* LayoutAssemblyFactory.swift */; };
+		DF032C872A70387800237CC7 /* UIViewController+LMA.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C772A70387800237CC7 /* UIViewController+LMA.swift */; };
+		DF032C882A70387800237CC7 /* LayoutModuleApplying.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C782A70387800237CC7 /* LayoutModuleApplying.swift */; };
+		DF032C892A70387800237CC7 /* SwinjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C792A70387800237CC7 /* SwinjectProvider.swift */; };
+		DF032C8A2A70387800237CC7 /* Container+DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF032C7A2A70387800237CC7 /* Container+DIContainer.swift */; };
+		DF11D23B2A6D481000F24B6E /* MoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF11D2352A6D481000F24B6E /* MoviesPresenter.swift */; };
+		DF11D23C2A6D481000F24B6E /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF11D2362A6D481000F24B6E /* MoviesView.swift */; };
+		DF11D23D2A6D481000F24B6E /* MoviesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF11D2372A6D481000F24B6E /* MoviesState.swift */; };
+		DF11D23E2A6D481000F24B6E /* MoviesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF11D2382A6D481000F24B6E /* MoviesAssembly.swift */; };
+		DF11D23F2A6D481000F24B6E /* MoviesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF11D2392A6D481000F24B6E /* MoviesProvider.swift */; };
+		DF11D2402A6D481000F24B6E /* MoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF11D23A2A6D481000F24B6E /* MoviesRouter.swift */; };
+		DF11D2432A6D489D00F24B6E /* MoviesRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF11D2422A6D489D00F24B6E /* MoviesRenderer.swift */; };
+		DF11D2452A6D6D8600F24B6E /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF11D2442A6D6D8600F24B6E /* MovieCell.swift */; };
 		DF22E378273132A0008B96A0 /* PlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF22E377273132A0008B96A0 /* PlaygroundTests.swift */; };
 		DF22E37E27313369008B96A0 /* CArchSwinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FFD78E26D65DDE00291681 /* CArchSwinject.framework */; platformFilter = ios; };
 		DF22E37F27313369008B96A0 /* CArchSwinject.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F0FFD78E26D65DDE00291681 /* CArchSwinject.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DF3C98722A6EE9380064CF75 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3C98712A6EE9380064CF75 /* Movie.swift */; };
+		DF3C98742A6EEA270064CF75 /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3C98732A6EEA270064CF75 /* Movies.swift */; };
+		DF3C98772A6EEA960064CF75 /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3C98762A6EEA960064CF75 /* MoviesService.swift */; };
+		DF3C98792A6EEE6A0064CF75 /* JSONDecoder+Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3C98782A6EEE6A0064CF75 /* JSONDecoder+Movies.swift */; };
+		DF3C987B2A6F02A00064CF75 /* BusinessLogicServicesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3C987A2A6F02A00064CF75 /* BusinessLogicServicesFactory.swift */; };
+		DF6136D32A6E5F270050238D /* MoviesLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6136D22A6E5F270050238D /* MoviesLayout.swift */; };
+		DF6B37F72A698DC200446BFB /* CArchSwinjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6B37F52A698DC200446BFB /* CArchSwinjectTests.swift */; };
+		DF6B37F82A698DC200446BFB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF6B37F62A698DC200446BFB /* Info.plist */; };
 		E993B77B865888B68EE47C5F /* MainRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A63B39BC48A2F7DBCD3272 /* MainRenderer.swift */; };
 		F0FFD79826D65DDE00291681 /* CArchSwinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FFD78E26D65DDE00291681 /* CArchSwinject.framework */; };
-		F0FFD7BD26D65F1700291681 /* InstanceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7AF26D65F1600291681 /* InstanceStorage.swift */; };
-		F0FFD7BE26D65F1700291681 /* ServicesApplying.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7B026D65F1600291681 /* ServicesApplying.swift */; };
-		F0FFD7BF26D65F1700291681 /* LayoutAssemblyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7B226D65F1600291681 /* LayoutAssemblyFactory.swift */; };
-		F0FFD7C026D65F1700291681 /* UIViewController+LMA.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7B326D65F1600291681 /* UIViewController+LMA.swift */; };
-		F0FFD7C126D65F1700291681 /* LayoutModuleApplying.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7B426D65F1600291681 /* LayoutModuleApplying.swift */; };
-		F0FFD7C226D65F1700291681 /* Container+DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7B526D65F1600291681 /* Container+DIContainer.swift */; };
-		F0FFD7C326D65F1700291681 /* Container+DIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7B726D65F1600291681 /* Container+DIStoryboard.swift */; };
-		F0FFD7C426D65F1700291681 /* UIViewController+SMA.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7B826D65F1600291681 /* UIViewController+SMA.swift */; };
-		F0FFD7C526D65F1700291681 /* StoryboardModuleApplying.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7B926D65F1600291681 /* StoryboardModuleApplying.swift */; };
-		F0FFD7C626D65F1700291681 /* StoryboardAssemblyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7BA26D65F1600291681 /* StoryboardAssemblyFactory.swift */; };
-		F0FFD7C726D65F1700291681 /* UnsafeInjectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7BB26D65F1700291681 /* UnsafeInjectable.swift */; };
-		F0FFD7C826D65F1700291681 /* SwinjectProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7BC26D65F1700291681 /* SwinjectProvider.swift */; };
-		F0FFD7CE26D65FFF00291681 /* Gemfile in Resources */ = {isa = PBXBuildFile; fileRef = F0FFD7CD26D65FFF00291681 /* Gemfile */; };
 		F0FFD7D626D6614C00291681 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7D526D6614C00291681 /* AppDelegate.swift */; };
-		F0FFD7D826D6614C00291681 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FFD7D726D6614C00291681 /* SceneDelegate.swift */; };
 		F0FFD7DF26D6614D00291681 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0FFD7DE26D6614D00291681 /* Assets.xcassets */; };
 		F0FFD7E226D6614D00291681 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0FFD7E026D6614D00291681 /* LaunchScreen.storyboard */; };
 		F4919562DED6B719AEAF3146 /* Pods_CArchSwinjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05452462847C3311CCB6591E /* Pods_CArchSwinjectTests.framework */; };
@@ -88,7 +102,6 @@
 		2C27CF50D2434DC7D7DD1C0D /* Pods-CArchSwinject-CArchSwinjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CArchSwinject-CArchSwinjectTests.debug.xcconfig"; path = "Target Support Files/Pods-CArchSwinject-CArchSwinjectTests/Pods-CArchSwinject-CArchSwinjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		303A1BB522B65808F52329E1 /* MainPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		4803454DBA7C69C68161B172 /* Pods-Playground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playground.release.xcconfig"; path = "Target Support Files/Pods-Playground/Pods-Playground.release.xcconfig"; sourceTree = "<group>"; };
-		5D98713FA04EDD7ED8CD88DB /* Main.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7CA94DA6FD464E86552A43EA /* Pods_Playground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Playground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE842558B939091CD28F6E5 /* MainView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B30AF7F87E853967355C3ADC /* Pods-CArchSwinject-CArchSwinjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CArchSwinject-CArchSwinjectTests.release.xcconfig"; path = "Target Support Files/Pods-CArchSwinject-CArchSwinjectTests/Pods-CArchSwinject-CArchSwinjectTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +111,30 @@
 		C8773D4668329CFAEB67B220 /* Pods-Playground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playground.debug.xcconfig"; path = "Target Support Files/Pods-Playground/Pods-Playground.debug.xcconfig"; sourceTree = "<group>"; };
 		C8AA24CD9170AE7A58CB3EDF /* Pods-CArchSwinjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CArchSwinjectTests.release.xcconfig"; path = "Target Support Files/Pods-CArchSwinjectTests/Pods-CArchSwinjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		CF207D7984CA472FB5526857 /* MainState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainState.swift; sourceTree = "<group>"; };
+		DF032C682A70387800237CC7 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DF032C6A2A70387800237CC7 /* CArchSwinjectMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CArchSwinjectMacro.swift; sourceTree = "<group>"; };
+		DF032C6C2A70387800237CC7 /* InstanceStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstanceStorage.swift; sourceTree = "<group>"; };
+		DF032C6D2A70387800237CC7 /* CArchSwinject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CArchSwinject.h; sourceTree = "<group>"; };
+		DF032C6E2A70387800237CC7 /* UnsafeInjectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeInjectable.swift; sourceTree = "<group>"; };
+		DF032C6F2A70387800237CC7 /* ServicesApplying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesApplying.swift; sourceTree = "<group>"; };
+		DF032C712A70387800237CC7 /* Container+DIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Container+DIStoryboard.swift"; sourceTree = "<group>"; };
+		DF032C722A70387800237CC7 /* UIViewController+SMA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SMA.swift"; sourceTree = "<group>"; };
+		DF032C732A70387800237CC7 /* StoryboardModuleApplying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardModuleApplying.swift; sourceTree = "<group>"; };
+		DF032C742A70387800237CC7 /* StoryboardAssemblyFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardAssemblyFactory.swift; sourceTree = "<group>"; };
+		DF032C762A70387800237CC7 /* LayoutAssemblyFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutAssemblyFactory.swift; sourceTree = "<group>"; };
+		DF032C772A70387800237CC7 /* UIViewController+LMA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+LMA.swift"; sourceTree = "<group>"; };
+		DF032C782A70387800237CC7 /* LayoutModuleApplying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutModuleApplying.swift; sourceTree = "<group>"; };
+		DF032C792A70387800237CC7 /* SwinjectProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwinjectProvider.swift; sourceTree = "<group>"; };
+		DF032C7A2A70387800237CC7 /* Container+DIContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Container+DIContainer.swift"; sourceTree = "<group>"; };
+		DF032C7B2A70387800237CC7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF11D2352A6D481000F24B6E /* MoviesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesPresenter.swift; sourceTree = "<group>"; };
+		DF11D2362A6D481000F24B6E /* MoviesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
+		DF11D2372A6D481000F24B6E /* MoviesState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesState.swift; sourceTree = "<group>"; };
+		DF11D2382A6D481000F24B6E /* MoviesAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesAssembly.swift; sourceTree = "<group>"; };
+		DF11D2392A6D481000F24B6E /* MoviesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesProvider.swift; sourceTree = "<group>"; };
+		DF11D23A2A6D481000F24B6E /* MoviesRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesRouter.swift; sourceTree = "<group>"; };
+		DF11D2422A6D489D00F24B6E /* MoviesRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRenderer.swift; sourceTree = "<group>"; };
+		DF11D2442A6D6D8600F24B6E /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		DF22E36227313152008B96A0 /* Playground.rambaspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Playground.rambaspec; sourceTree = "<group>"; };
 		DF22E36527313152008B96A0 /* assemblyTest.swift.liquid */ = {isa = PBXFileReference; lastKnownFileType = text; path = assemblyTest.swift.liquid; sourceTree = "<group>"; };
 		DF22E36727313152008B96A0 /* renderer.swift.liquid */ = {isa = PBXFileReference; lastKnownFileType = text; path = renderer.swift.liquid; sourceTree = "<group>"; };
@@ -111,6 +148,14 @@
 		DF22E37027313152008B96A0 /* AutoMockable-BlackBook.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = "AutoMockable-BlackBook.stencil"; sourceTree = "<group>"; };
 		DF22E375273132A0008B96A0 /* PlaygroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaygroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF22E377273132A0008B96A0 /* PlaygroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundTests.swift; sourceTree = "<group>"; };
+		DF3C98712A6EE9380064CF75 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		DF3C98732A6EEA270064CF75 /* Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
+		DF3C98762A6EEA960064CF75 /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
+		DF3C98782A6EEE6A0064CF75 /* JSONDecoder+Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Movies.swift"; sourceTree = "<group>"; };
+		DF3C987A2A6F02A00064CF75 /* BusinessLogicServicesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLogicServicesFactory.swift; sourceTree = "<group>"; };
+		DF6136D22A6E5F270050238D /* MoviesLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesLayout.swift; sourceTree = "<group>"; };
+		DF6B37F52A698DC200446BFB /* CArchSwinjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CArchSwinjectTests.swift; sourceTree = "<group>"; };
+		DF6B37F62A698DC200446BFB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E52EB1D0C22563CEE4B8A93D /* Pods-CArchSwinject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CArchSwinject.release.xcconfig"; path = "Target Support Files/Pods-CArchSwinject/Pods-CArchSwinject.release.xcconfig"; sourceTree = "<group>"; };
 		ECE2C8F11D3A81928212190B /* MainRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		F0A5F4FB26D8E3A2004901E5 /* CArchSwinject.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = CArchSwinject.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -120,28 +165,11 @@
 		F0A5F50126D8E8D4004901E5 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F0FFD78E26D65DDE00291681 /* CArchSwinject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CArchSwinject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FFD79726D65DDE00291681 /* CArchSwinjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CArchSwinjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F0FFD7A926D65E5C00291681 /* CArchSwinjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CArchSwinjectTests.swift; sourceTree = "<group>"; };
-		F0FFD7AA26D65E5C00291681 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F0FFD7AB26D65E5C00291681 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		F0FFD7AD26D65E5C00291681 /* CArchSwinject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CArchSwinject.h; sourceTree = "<group>"; };
-		F0FFD7AE26D65E5C00291681 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F0FFD7AF26D65F1600291681 /* InstanceStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstanceStorage.swift; sourceTree = "<group>"; };
-		F0FFD7B026D65F1600291681 /* ServicesApplying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesApplying.swift; sourceTree = "<group>"; };
-		F0FFD7B226D65F1600291681 /* LayoutAssemblyFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutAssemblyFactory.swift; sourceTree = "<group>"; };
-		F0FFD7B326D65F1600291681 /* UIViewController+LMA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+LMA.swift"; sourceTree = "<group>"; };
-		F0FFD7B426D65F1600291681 /* LayoutModuleApplying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutModuleApplying.swift; sourceTree = "<group>"; };
-		F0FFD7B526D65F1600291681 /* Container+DIContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Container+DIContainer.swift"; sourceTree = "<group>"; };
-		F0FFD7B726D65F1600291681 /* Container+DIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Container+DIStoryboard.swift"; sourceTree = "<group>"; };
-		F0FFD7B826D65F1600291681 /* UIViewController+SMA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+SMA.swift"; sourceTree = "<group>"; };
-		F0FFD7B926D65F1600291681 /* StoryboardModuleApplying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardModuleApplying.swift; sourceTree = "<group>"; };
-		F0FFD7BA26D65F1600291681 /* StoryboardAssemblyFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardAssemblyFactory.swift; sourceTree = "<group>"; };
-		F0FFD7BB26D65F1700291681 /* UnsafeInjectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeInjectable.swift; sourceTree = "<group>"; };
-		F0FFD7BC26D65F1700291681 /* SwinjectProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwinjectProvider.swift; sourceTree = "<group>"; };
 		F0FFD7CC26D65FF700291681 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F0FFD7CD26D65FFF00291681 /* Gemfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = Gemfile; sourceTree = "<group>"; };
 		F0FFD7D326D6614C00291681 /* Playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Playground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FFD7D526D6614C00291681 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F0FFD7D726D6614C00291681 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F0FFD7DE26D6614D00291681 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F0FFD7E126D6614D00291681 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F0FFD7E326D6614D00291681 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -199,12 +227,11 @@
 			isa = PBXGroup;
 			children = (
 				BDF7511448D74B0D123EE1FA /* Renderers */,
-				5D98713FA04EDD7ED8CD88DB /* Main.storyboard */,
 				8BE842558B939091CD28F6E5 /* MainView.swift */,
 				CF207D7984CA472FB5526857 /* MainState.swift */,
-				303A1BB522B65808F52329E1 /* MainPresenter.swift */,
-				B80C9ED9B6D46F7B2538B896 /* MainProvider.swift */,
 				ECE2C8F11D3A81928212190B /* MainRouter.swift */,
+				B80C9ED9B6D46F7B2538B896 /* MainProvider.swift */,
+				303A1BB522B65808F52329E1 /* MainPresenter.swift */,
 				FD186A6BC1F656AF88FE9232 /* MainAssembly.swift */,
 			);
 			path = Main;
@@ -263,6 +290,85 @@
 				72E32C1BA0468E6580BD9D28 /* Assembly */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		DF032C672A70387800237CC7 /* CArchSwinjectClient */ = {
+			isa = PBXGroup;
+			children = (
+				DF032C682A70387800237CC7 /* main.swift */,
+			);
+			path = CArchSwinjectClient;
+			sourceTree = "<group>";
+		};
+		DF032C692A70387800237CC7 /* CArchSwinjectMacros */ = {
+			isa = PBXGroup;
+			children = (
+				DF032C6A2A70387800237CC7 /* CArchSwinjectMacro.swift */,
+			);
+			path = CArchSwinjectMacros;
+			sourceTree = "<group>";
+		};
+		DF032C6B2A70387800237CC7 /* CArchSwinject */ = {
+			isa = PBXGroup;
+			children = (
+				DF032C7B2A70387800237CC7 /* Info.plist */,
+				DF032C6D2A70387800237CC7 /* CArchSwinject.h */,
+				DF032C792A70387800237CC7 /* SwinjectProvider.swift */,
+				DF032C6C2A70387800237CC7 /* InstanceStorage.swift */,
+				DF032C6E2A70387800237CC7 /* UnsafeInjectable.swift */,
+				DF032C6F2A70387800237CC7 /* ServicesApplying.swift */,
+				DF032C7A2A70387800237CC7 /* Container+DIContainer.swift */,
+				DF032C702A70387800237CC7 /* Storyboard */,
+				DF032C752A70387800237CC7 /* Layout */,
+			);
+			path = CArchSwinject;
+			sourceTree = "<group>";
+		};
+		DF032C702A70387800237CC7 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				DF032C712A70387800237CC7 /* Container+DIStoryboard.swift */,
+				DF032C722A70387800237CC7 /* UIViewController+SMA.swift */,
+				DF032C732A70387800237CC7 /* StoryboardModuleApplying.swift */,
+				DF032C742A70387800237CC7 /* StoryboardAssemblyFactory.swift */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		DF032C752A70387800237CC7 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				DF032C762A70387800237CC7 /* LayoutAssemblyFactory.swift */,
+				DF032C772A70387800237CC7 /* UIViewController+LMA.swift */,
+				DF032C782A70387800237CC7 /* LayoutModuleApplying.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		DF11D2342A6D47F100F24B6E /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+				DF3C98702A6EE91E0064CF75 /* Modles */,
+				DF3C98752A6EEA780064CF75 /* Services */,
+				DF11D2412A6D488E00F24B6E /* Renderers */,
+				DF11D2362A6D481000F24B6E /* MoviesView.swift */,
+				DF11D2372A6D481000F24B6E /* MoviesState.swift */,
+				DF11D23A2A6D481000F24B6E /* MoviesRouter.swift */,
+				DF11D2392A6D481000F24B6E /* MoviesProvider.swift */,
+				DF11D2352A6D481000F24B6E /* MoviesPresenter.swift */,
+				DF11D2382A6D481000F24B6E /* MoviesAssembly.swift */,
+			);
+			path = Movies;
+			sourceTree = "<group>";
+		};
+		DF11D2412A6D488E00F24B6E /* Renderers */ = {
+			isa = PBXGroup;
+			children = (
+				DF11D2442A6D6D8600F24B6E /* MovieCell.swift */,
+				DF6136D22A6E5F270050238D /* MoviesLayout.swift */,
+				DF11D2422A6D489D00F24B6E /* MoviesRenderer.swift */,
+			);
+			path = Renderers;
 			sourceTree = "<group>";
 		};
 		DF22E36027313152008B96A0 /* Templates */ = {
@@ -336,15 +442,43 @@
 			isa = PBXGroup;
 			children = (
 				F0FFD7D526D6614C00291681 /* AppDelegate.swift */,
-				F0FFD7D726D6614C00291681 /* SceneDelegate.swift */,
+				DF3C987A2A6F02A00064CF75 /* BusinessLogicServicesFactory.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		DF3C98702A6EE91E0064CF75 /* Modles */ = {
+			isa = PBXGroup;
+			children = (
+				DF3C98712A6EE9380064CF75 /* Movie.swift */,
+				DF3C98732A6EEA270064CF75 /* Movies.swift */,
+			);
+			path = Modles;
+			sourceTree = "<group>";
+		};
+		DF3C98752A6EEA780064CF75 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DF3C98762A6EEA960064CF75 /* MoviesService.swift */,
+				DF3C98782A6EEE6A0064CF75 /* JSONDecoder+Movies.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		DF6B37F42A698DC200446BFB /* CArchSwinjectTests */ = {
+			isa = PBXGroup;
+			children = (
+				DF6B37F52A698DC200446BFB /* CArchSwinjectTests.swift */,
+				DF6B37F62A698DC200446BFB /* Info.plist */,
+			);
+			path = CArchSwinjectTests;
 			sourceTree = "<group>";
 		};
 		EA29ADE55776BEE5FEE98AFF /* Modules */ = {
 			isa = PBXGroup;
 			children = (
 				21BA46509F8F32735F190B5C /* Main */,
+				DF11D2342A6D47F100F24B6E /* Movies */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -356,7 +490,7 @@
 				F0FFD7C926D65FD000291681 /* CICD */,
 				F0FFD7CB26D65FDD00291681 /* Metadata */,
 				F0FFD7AC26D65E5C00291681 /* Sources */,
-				F0FFD7A826D65E5C00291681 /* Tests */,
+				DF6B37F42A698DC200446BFB /* CArchSwinjectTests */,
 				F0FFD7D426D6614C00291681 /* Playground */,
 				DF22E376273132A0008B96A0 /* PlaygroundTests */,
 				DF22E36027313152008B96A0 /* Templates */,
@@ -377,50 +511,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F0FFD7A826D65E5C00291681 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				F0FFD7A926D65E5C00291681 /* CArchSwinjectTests.swift */,
-				F0FFD7AA26D65E5C00291681 /* Info.plist */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
 		F0FFD7AC26D65E5C00291681 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				F0FFD7AE26D65E5C00291681 /* Info.plist */,
-				F0FFD7AD26D65E5C00291681 /* CArchSwinject.h */,
-				F0FFD7AF26D65F1600291681 /* InstanceStorage.swift */,
-				F0FFD7BB26D65F1700291681 /* UnsafeInjectable.swift */,
-				F0FFD7BC26D65F1700291681 /* SwinjectProvider.swift */,
-				F0FFD7B026D65F1600291681 /* ServicesApplying.swift */,
-				F0FFD7B526D65F1600291681 /* Container+DIContainer.swift */,
-				F0FFD7B126D65F1600291681 /* Layout */,
-				F0FFD7B626D65F1600291681 /* Storyboard */,
+				DF032C6B2A70387800237CC7 /* CArchSwinject */,
+				DF032C672A70387800237CC7 /* CArchSwinjectClient */,
+				DF032C692A70387800237CC7 /* CArchSwinjectMacros */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		F0FFD7B126D65F1600291681 /* Layout */ = {
-			isa = PBXGroup;
-			children = (
-				F0FFD7B326D65F1600291681 /* UIViewController+LMA.swift */,
-				F0FFD7B426D65F1600291681 /* LayoutModuleApplying.swift */,
-				F0FFD7B226D65F1600291681 /* LayoutAssemblyFactory.swift */,
-			);
-			path = Layout;
-			sourceTree = "<group>";
-		};
-		F0FFD7B626D65F1600291681 /* Storyboard */ = {
-			isa = PBXGroup;
-			children = (
-				F0FFD7B826D65F1600291681 /* UIViewController+SMA.swift */,
-				F0FFD7B726D65F1600291681 /* Container+DIStoryboard.swift */,
-				F0FFD7B926D65F1600291681 /* StoryboardModuleApplying.swift */,
-				F0FFD7BA26D65F1600291681 /* StoryboardAssemblyFactory.swift */,
-			);
-			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		F0FFD7C926D65FD000291681 /* CICD */ = {
@@ -471,6 +569,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF032C7F2A70387800237CC7 /* CArchSwinject.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +651,8 @@
 				DF22E38127313369008B96A0 /* PBXTargetDependency */,
 			);
 			name = Playground;
+			packageProductDependencies = (
+			);
 			productName = Playground;
 			productReference = F0FFD7D326D6614C00291681 /* Playground.app */;
 			productType = "com.apple.product-type.application";
@@ -590,6 +691,8 @@
 				Base,
 			);
 			mainGroup = F0FFD78426D65DDE00291681;
+			packageReferences = (
+			);
 			productRefGroup = F0FFD78F26D65DDE00291681 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -614,7 +717,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0FFD7CE26D65FFF00291681 /* Gemfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +724,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF6B37F82A698DC200446BFB /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,7 +734,6 @@
 			files = (
 				F0FFD7E226D6614D00291681 /* LaunchScreen.storyboard in Resources */,
 				F0FFD7DF26D6614D00291681 /* Assets.xcassets in Resources */,
-				CBD5F75EFDA8D4EEDBBBF5C6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,18 +874,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0FFD7C226D65F1700291681 /* Container+DIContainer.swift in Sources */,
-				F0FFD7BF26D65F1700291681 /* LayoutAssemblyFactory.swift in Sources */,
-				F0FFD7BD26D65F1700291681 /* InstanceStorage.swift in Sources */,
-				F0FFD7C526D65F1700291681 /* StoryboardModuleApplying.swift in Sources */,
-				F0FFD7BE26D65F1700291681 /* ServicesApplying.swift in Sources */,
-				F0FFD7C026D65F1700291681 /* UIViewController+LMA.swift in Sources */,
-				F0FFD7C326D65F1700291681 /* Container+DIStoryboard.swift in Sources */,
-				F0FFD7C826D65F1700291681 /* SwinjectProvider.swift in Sources */,
-				F0FFD7C426D65F1700291681 /* UIViewController+SMA.swift in Sources */,
-				F0FFD7C126D65F1700291681 /* LayoutModuleApplying.swift in Sources */,
-				F0FFD7C626D65F1700291681 /* StoryboardAssemblyFactory.swift in Sources */,
-				F0FFD7C726D65F1700291681 /* UnsafeInjectable.swift in Sources */,
+				DF032C872A70387800237CC7 /* UIViewController+LMA.swift in Sources */,
+				DF032C802A70387800237CC7 /* UnsafeInjectable.swift in Sources */,
+				DF032C862A70387800237CC7 /* LayoutAssemblyFactory.swift in Sources */,
+				DF032C812A70387800237CC7 /* ServicesApplying.swift in Sources */,
+				DF032C822A70387800237CC7 /* Container+DIStoryboard.swift in Sources */,
+				DF032C8A2A70387800237CC7 /* Container+DIContainer.swift in Sources */,
+				DF032C842A70387800237CC7 /* StoryboardModuleApplying.swift in Sources */,
+				DF032C852A70387800237CC7 /* StoryboardAssemblyFactory.swift in Sources */,
+				DF032C882A70387800237CC7 /* LayoutModuleApplying.swift in Sources */,
+				DF032C892A70387800237CC7 /* SwinjectProvider.swift in Sources */,
+				DF032C832A70387800237CC7 /* UIViewController+SMA.swift in Sources */,
+				DF032C7E2A70387800237CC7 /* InstanceStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,6 +893,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF6B37F72A698DC200446BFB /* CArchSwinjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -799,14 +902,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0FFD7D626D6614C00291681 /* AppDelegate.swift in Sources */,
-				F0FFD7D826D6614C00291681 /* SceneDelegate.swift in Sources */,
+				DF11D2402A6D481000F24B6E /* MoviesRouter.swift in Sources */,
+				DF3C98722A6EE9380064CF75 /* Movie.swift in Sources */,
 				E993B77B865888B68EE47C5F /* MainRenderer.swift in Sources */,
+				DF11D23D2A6D481000F24B6E /* MoviesState.swift in Sources */,
+				DF11D23B2A6D481000F24B6E /* MoviesPresenter.swift in Sources */,
+				DF3C98772A6EEA960064CF75 /* MoviesService.swift in Sources */,
+				DF3C987B2A6F02A00064CF75 /* BusinessLogicServicesFactory.swift in Sources */,
 				8E90F79206FC967AE2CF242E /* MainView.swift in Sources */,
 				066E32BB153C8E3370E9D4D7 /* MainState.swift in Sources */,
+				DF11D23C2A6D481000F24B6E /* MoviesView.swift in Sources */,
 				4E8375EAF30CACA4D765FBF6 /* MainPresenter.swift in Sources */,
 				5DBD411818C4BEC49168FA17 /* MainProvider.swift in Sources */,
 				A8C8F76A66EFBCA1B251C217 /* MainRouter.swift in Sources */,
+				DF11D2432A6D489D00F24B6E /* MoviesRenderer.swift in Sources */,
+				DF11D23E2A6D481000F24B6E /* MoviesAssembly.swift in Sources */,
+				DF6136D32A6E5F270050238D /* MoviesLayout.swift in Sources */,
 				99CE846A3A9E69196B49B861 /* MainAssembly.swift in Sources */,
+				DF3C98742A6EEA270064CF75 /* Movies.swift in Sources */,
+				DF3C98792A6EEE6A0064CF75 /* JSONDecoder+Movies.swift in Sources */,
+				DF11D23F2A6D481000F24B6E /* MoviesProvider.swift in Sources */,
+				DF11D2452A6D6D8600F24B6E /* MovieCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1025,7 +1141,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Sources/CArchSwinject/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
@@ -1038,7 +1154,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = Sources/CArchSwinject.h;
+				SWIFT_OBJC_BRIDGING_HEADER = Sources/CArchSwinject/CArchSwinject.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1055,7 +1171,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Sources/CArchSwinject/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
@@ -1068,7 +1184,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = Sources/CArchSwinject.h;
+				SWIFT_OBJC_BRIDGING_HEADER = Sources/CArchSwinject/CArchSwinject.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1078,7 +1194,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0E3CF57CB77F493D3D12FC4E /* Pods-CArchSwinjectTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1097,7 +1213,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8AA24CD9170AE7A58CB3EDF /* Pods-CArchSwinjectTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1116,10 +1232,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8773D4668329CFAEB67B220 /* Pods-Playground.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Playground/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1135,10 +1253,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4803454DBA7C69C68161B172 /* Pods-Playground.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Playground/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

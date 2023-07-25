@@ -1,38 +1,40 @@
 PODS:
+  - Alamofire (5.7.1)
+  - AlamofireImage (4.2.0):
+    - Alamofire (~> 5.4)
   - CArch (1.0.0)
   - SwiftLint (0.50.3)
-  - Swinject (2.7.1)
-  - SwinjectStoryboard (2.2.2):
-    - Swinject (~> 2.7.1)
+  - Swinject (2.8.3)
+  - SwinjectStoryboard (2.2.0):
+    - Swinject (~> 2.6)
 
 DEPENDENCIES:
-  - CArch (from `https://github.com/ayham-achami/CArch.git`, branch `mainline`)
+  - AlamofireImage
+  - CArch (from `/Users/ayham/iOSFrameworks/GitHub/CArch`)
   - SwiftLint
   - Swinject
   - SwinjectStoryboard
 
 SPEC REPOS:
   https://github.com/CocoaPods/specs.git:
+    - Alamofire
+    - AlamofireImage
     - SwiftLint
     - Swinject
     - SwinjectStoryboard
 
 EXTERNAL SOURCES:
   CArch:
-    :branch: mainline
-    :git: https://github.com/ayham-achami/CArch.git
-
-CHECKOUT OPTIONS:
-  CArch:
-    :commit: 88477e31d28046a85eefeccabafcf84fb642dfac
-    :git: https://github.com/ayham-achami/CArch.git
+    :path: "/Users/ayham/iOSFrameworks/GitHub/CArch"
 
 SPEC CHECKSUMS:
-  CArch: 8e385adfd9744eae7ffa26a7c913a60a6c11fcf8
+  Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
+  CArch: 8196f9bce271aaaeddebd8016970e0afd794f0a6
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
-  Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
-  SwinjectStoryboard: 240ce371396da09a4c43c72ee5c148108500e184
+  Swinject: 893c9a543000ac2f10ee4cbaf0933c6992c935d5
+  SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
 
-PODFILE CHECKSUM: d49a6bb03c1b960a94eff09c30f056bcdb77da9e
+PODFILE CHECKSUM: 8725d6e551555e692ffbb4ccb295482231282d03
 
 COCOAPODS: 1.10.2

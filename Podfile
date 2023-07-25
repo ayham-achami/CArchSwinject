@@ -10,7 +10,7 @@ def common_pods
   # Control
   pod 'SwiftLint'
   # Architecture
-  pod 'CArch', :git => 'https://github.com/ayham-achami/CArch.git', :branch => 'mainline'
+  pod 'CArch', :path => '/Users/ayham/iOSFrameworks/GitHub/CArch' #:git => 'https://github.com/ayham-achami/CArch.git', :branch => 'mainline'
   # Dependency injection
   pod 'Swinject'
   pod 'SwinjectStoryboard'
@@ -34,4 +34,5 @@ target 'Playground' do
   # Common
   common_pods
   # Pods for Playground
+  pod 'AlamofireImage'
 end

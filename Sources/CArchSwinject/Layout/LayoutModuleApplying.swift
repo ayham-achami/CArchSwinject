@@ -1,5 +1,5 @@
 //
-//  UIViewController+LMA.swift
+//  LayoutModuleApplying.swift
 //
 //  The MIT License (MIT)
 //
@@ -23,14 +23,27 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import UIKit
 import CArch
+import Swinject
 
-// MARK: - UIViewController + ModuleAssembler
-extension UIViewController: LayoutModuleAssembler {
+/// Вспомогательный класс для регистрации модуля в контейнер зависимости
+class LayoutModuleApplying: Assembly {
     
-    public static func assembly<Module>(_ type: Module.Type) ->
-        StorageType.WeakReference<Module> where Module: AnyObject, Module: LayoutModuleAssembly {
-        .init(LayoutAssemblyFactory().assembly(Module()))
+    /// Модуль для сборки
+    let moduleAssembly: LayoutModuleAssembly
+
+    /// Инициализации с любым модулем
+    ///
+    /// - Parameter anyModuleAssembly: Любой модуль
+    init(_ moduleAssembly: LayoutModuleAssembly) {
+        self.moduleAssembly = moduleAssembly
+    }
+
+    func assemble(container: Container) {
+        moduleAssembly.registerView(in: container)
+        moduleAssembly.registerRenderers(in: container)
+        moduleAssembly.registerPresenter(in: container)
+        moduleAssembly.registerProvider(in: container)
+        moduleAssembly.registerRouter(in: container)
     }
 }

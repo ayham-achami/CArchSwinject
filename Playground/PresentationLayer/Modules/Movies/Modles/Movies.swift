@@ -20,30 +20,13 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import CArch
+import Foundation
 
-/// Протокол передающий доступ к некоторым свойствам состояние модуля `Main` как только для чтения
-protocol MainModuleReadOnlyState: AnyReadOnlyState {}
+struct Movies: Codable {
 
-/// Протокол передающий доступ к состоянию модуля как только для чтения
-protocol MainModuleStateRepresentable: AnyModuleStateRepresentable {
+    let page: Int
+    let totalPages: Int
+    let totalResults: Int
     
-    var readOnly: MainModuleReadOnlyState { get }
+    let results: [Movie]
 }
-
-/// Состояние модуля `Main`
-struct MainModuleState: ModuleState {    
-    
-    struct InitialState: ModuleInitialState {}
-    
-    struct FinalState: ModuleFinalState {}
-    
-    typealias InitialStateType = InitialState
-    typealias FinalStateType = FinalState
-    
-    var initialState: MainModuleState.InitialStateType?
-    var finalState: MainModuleState.FinalStateType?
-}
-
-// MARK: - MainModuleState +  ReadOnly
-extension MainModuleState: MainModuleReadOnlyState {}

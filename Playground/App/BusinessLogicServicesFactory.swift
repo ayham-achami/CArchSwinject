@@ -21,29 +21,19 @@
 //  SOFTWARE.
 
 import CArch
+import Foundation
+import CArchSwinject
 
-/// Протокол передающий доступ к некоторым свойствам состояние модуля `Main` как только для чтения
-protocol MainModuleReadOnlyState: AnyReadOnlyState {}
-
-/// Протокол передающий доступ к состоянию модуля как только для чтения
-protocol MainModuleStateRepresentable: AnyModuleStateRepresentable {
+struct MoviesModulesServices: DIAssemblyCollection {
     
-    var readOnly: MainModuleReadOnlyState { get }
+    var services: [DIAssembly] {
+        [MoviesServiceAssembly()]
+    }
 }
 
-/// Состояние модуля `Main`
-struct MainModuleState: ModuleState {    
+struct BusinessLogicServicesFactory: ServicesRecorder {
     
-    struct InitialState: ModuleInitialState {}
-    
-    struct FinalState: ModuleFinalState {}
-    
-    typealias InitialStateType = InitialState
-    typealias FinalStateType = FinalState
-    
-    var initialState: MainModuleState.InitialStateType?
-    var finalState: MainModuleState.FinalStateType?
+    var records: [any DIAssemblyCollection] {
+        [MoviesModulesServices()]
+    }
 }
-
-// MARK: - MainModuleState +  ReadOnly
-extension MainModuleState: MainModuleReadOnlyState {}

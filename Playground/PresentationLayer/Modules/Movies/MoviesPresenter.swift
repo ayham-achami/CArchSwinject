@@ -23,21 +23,36 @@
 import CArch
 
 /// Протокол реализующий логику отображения данных
-protocol MainRenderingLogic: RootRenderingLogic {}
+@MainActor protocol MoviesRenderingLogic: RootRenderingLogic {
+    
+     func display(_ movies: [MovieCell.ModelType])
+}
 
 /// Объект содержащий логику преобразования объектов модели `Model` в
-/// объекты `UIModel` (ViewModel) модуля `Main`
-final class MainPresenter: MainPresentationLogic {
+/// объекты `UIModel` (ViewModel) модуля `Movies`
+final class MoviesPresenter: MoviesPresentationLogic {
+
+    private weak var view: MoviesRenderingLogic?
+    private weak var state: MoviesModuleStateRepresentable?
+
+    private let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        return formatter
+    }()
     
-    private weak var view: MainRenderingLogic?
-    private weak var state: MainModuleStateRepresentable?
-    
-    init(view: MainRenderingLogic,
-         state: MainModuleStateRepresentable) {
+    init(view: MoviesRenderingLogic,
+         state: MoviesModuleStateRepresentable) {
         self.view = view
         self.state = state
     }
 
+    func didObtain(_ movies: [Movie]) {
+        Task {
+            await view?.display(movies.map { .init($0, formatter) })
+        }
+    }
+    
     func encountered(_ error: Error) {
         Task {
             await view?.displayErrorAlert(with: error)
@@ -45,5 +60,13 @@ final class MainPresenter: MainPresentationLogic {
     }
 }
 
-// MARK: - Private methods
-private extension MainPresenter {}
+private extension MovieCell.Model {
+    
+    init(_ movie: Movie, _ formatter: DateFormatter) {
+        self.id = movie.id
+        self.name = movie.title
+        self.rating = movie.voteAverage / 2
+        self.posterPath = movie.posterPath ?? ""
+        self.releaseDate = formatter.string(from: movie.releaseDate)
+    }
+}

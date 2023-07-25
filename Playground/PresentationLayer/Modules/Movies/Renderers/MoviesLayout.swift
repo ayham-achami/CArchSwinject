@@ -20,30 +20,29 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import CArch
+import UIKit
 
-/// Протокол передающий доступ к некоторым свойствам состояние модуля `Main` как только для чтения
-protocol MainModuleReadOnlyState: AnyReadOnlyState {}
+final class MoviesLayout: UICollectionViewFlowLayout {
 
-/// Протокол передающий доступ к состоянию модуля как только для чтения
-protocol MainModuleStateRepresentable: AnyModuleStateRepresentable {
+    let minCellHeight = CGFloat(250)
+    let minColumnWidth = CGFloat(150)
+    let insets = UIEdgeInsets(top: 0.0, left: 16, bottom: 0.0, right: 16)
+
+    // MARK: Overrides
+    override func prepare() {
+        super.prepare()
+        self.itemSize = calculateItemSize()
+        self.sectionInset = insets
+        self.sectionInsetReference = .fromSafeArea
+        self.minimumLineSpacing = 25
+    }
     
-    var readOnly: MainModuleReadOnlyState { get }
+    func calculateItemSize() -> CGSize {
+        guard let collectionView = collectionView else { return CGSize() }
+        let availableWidth = collectionView.bounds.width
+        let maxNumColumns = ((availableWidth - insets.left) / (minColumnWidth + insets.left)).rounded(.down)
+        let cellWidth = ((availableWidth - insets.left) / maxNumColumns - insets.left).rounded(.down)
+        let cellHeight = (minCellHeight * (cellWidth/minColumnWidth)).rounded(.down)
+        return CGSize(width: cellWidth, height: cellHeight)
+    }
 }
-
-/// Состояние модуля `Main`
-struct MainModuleState: ModuleState {    
-    
-    struct InitialState: ModuleInitialState {}
-    
-    struct FinalState: ModuleFinalState {}
-    
-    typealias InitialStateType = InitialState
-    typealias FinalStateType = FinalState
-    
-    var initialState: MainModuleState.InitialStateType?
-    var finalState: MainModuleState.FinalStateType?
-}
-
-// MARK: - MainModuleState +  ReadOnly
-extension MainModuleState: MainModuleReadOnlyState {}

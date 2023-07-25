@@ -1,5 +1,5 @@
 //
-//  LayoutAssemblyFactory.swift
+//  CArchSwinjectTests.swift
 //
 //  The MIT License (MIT)
 //
@@ -23,34 +23,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import CArch
-import Swinject
+import XCTest
+@testable import CArchSwinject
 
-/// Фабрика создания и внедрение зависимости
-public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {    
+class CArchSwinjectTests: XCTestCase {
     
-    static var provider = SwinjectProvider(.init())
-    
-    public var layoutContainer: DIContainer {
-        Self.provider.container
-    }
-    
-    public var registrar: DIRegistrar {
-        Self.provider.container
-    }
-    
-    public var resolver: DIResolver {
-        Self.provider.container
-    }
-    
-    public init() {}
-    
-    public func assembly<Module>(_ module: Module) -> Module where Module: LayoutModuleAssembly {
-        Self.provider.apply(LayoutModuleApplying(module))
-        return module
-    }
-    
-    public func record<Recorder>(_ recorder: Recorder.Type) where Recorder: ServicesRecorder {
-        recorder.init().records.forEach { Self.provider.apply(ServicesApplying($0)) }
+    func testPrint() {
+        print("Has test passed")
     }
 }

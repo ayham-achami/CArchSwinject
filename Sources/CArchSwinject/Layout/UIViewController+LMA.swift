@@ -1,3 +1,6 @@
+//
+//  UIViewController+LMA.swift
+//
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2019 Community Arch
@@ -20,30 +23,15 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+#if canImport(UIKit)
+import UIKit
 import CArch
 
-/// Протокол передающий доступ к некоторым свойствам состояние модуля `Main` как только для чтения
-protocol MainModuleReadOnlyState: AnyReadOnlyState {}
-
-/// Протокол передающий доступ к состоянию модуля как только для чтения
-protocol MainModuleStateRepresentable: AnyModuleStateRepresentable {
+// MARK: - UIViewController + ModuleAssembler
+extension UIViewController: LayoutModuleAssembler {
     
-    var readOnly: MainModuleReadOnlyState { get }
+    public static func assembly<Module>(_ type: Module.Type) -> StorageType.WeakReference<Module> where Module: AnyObject, Module: LayoutModuleAssembly {
+        .init(LayoutAssemblyFactory().assembly(Module()))
+    }
 }
-
-/// Состояние модуля `Main`
-struct MainModuleState: ModuleState {    
-    
-    struct InitialState: ModuleInitialState {}
-    
-    struct FinalState: ModuleFinalState {}
-    
-    typealias InitialStateType = InitialState
-    typealias FinalStateType = FinalState
-    
-    var initialState: MainModuleState.InitialStateType?
-    var finalState: MainModuleState.FinalStateType?
-}
-
-// MARK: - MainModuleState +  ReadOnly
-extension MainModuleState: MainModuleReadOnlyState {}
+#endif

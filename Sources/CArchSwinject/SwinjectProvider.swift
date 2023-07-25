@@ -33,9 +33,9 @@ class SwinjectProvider {
     
     /// Контейнер внедрения зависимостей, в котором хранятся сервисы.
     var container: Container {
-        guard let container = assembler.resolver as? Container else {
-            preconditionFailure("SwinjectAssemblerAPI resolver is not an instance of Container")
-        }
+        guard
+            let container = assembler.resolver as? Container
+        else { preconditionFailure("SwinjectAssemblerAPI resolver is not an instance of Container") }
         return container
     }
     

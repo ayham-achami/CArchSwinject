@@ -22,28 +22,43 @@
 
 import CArch
 
-/// Протокол передающий доступ к некоторым свойствам состояние модуля `Main` как только для чтения
-protocol MainModuleReadOnlyState: AnyReadOnlyState {}
+/// Протокол передающий доступ к некоторым свойствам состояние модуля `Movies` как только для чтения
+protocol MoviesModuleReadOnlyState: AnyReadOnlyState {}
 
 /// Протокол передающий доступ к состоянию модуля как только для чтения
-protocol MainModuleStateRepresentable: AnyModuleStateRepresentable {
-    
-    var readOnly: MainModuleReadOnlyState { get }
+protocol MoviesModuleStateRepresentable: AnyModuleStateRepresentable {
+
+    var readOnly: MoviesModuleReadOnlyState { get }
 }
 
-/// Состояние модуля `Main`
-struct MainModuleState: ModuleState {    
+/// Состояние модуля `Movies`
+struct MoviesModuleState: ModuleState {
+
+    enum MoviesType {
+        
+        case popular
+        case upcoming
+        case topRated
+        case nowPlaying
+    }
     
-    struct InitialState: ModuleInitialState {}
-    
+    struct InitialState: ModuleInitialState {
+        
+        let title: String
+        let icon: UIImage
+        let type: MoviesType
+    }
+
     struct FinalState: ModuleFinalState {}
-    
+
     typealias InitialStateType = InitialState
     typealias FinalStateType = FinalState
+
+    var initialState: MoviesModuleState.InitialStateType?
+    var finalState: MoviesModuleState.FinalStateType?
     
-    var initialState: MainModuleState.InitialStateType?
-    var finalState: MainModuleState.FinalStateType?
+    var page: Int = 1
 }
 
-// MARK: - MainModuleState +  ReadOnly
-extension MainModuleState: MainModuleReadOnlyState {}
+// MARK: - MoviesModuleState +  ReadOnly
+extension MoviesModuleState: MoviesModuleReadOnlyState {}

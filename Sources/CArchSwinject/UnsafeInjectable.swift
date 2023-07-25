@@ -1,3 +1,6 @@
+//
+//  UnsafeInjectable.swift
+//
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2019 Community Arch
@@ -21,29 +24,24 @@
 //  SOFTWARE.
 
 import CArch
+import Foundation
 
-/// Протокол передающий доступ к некоторым свойствам состояние модуля `Main` как только для чтения
-protocol MainModuleReadOnlyState: AnyReadOnlyState {}
+// MARK: - UnsafeInjectable
+@propertyWrapper
+public struct UnsafeInjectable<InjectableType> {
 
-/// Протокол передающий доступ к состоянию модуля как только для чтения
-protocol MainModuleStateRepresentable: AnyModuleStateRepresentable {
+    private var injectable: InjectableType
+
+    public var wrappedValue: InjectableType { injectable }
+
+    public init(_ factory: AnyDIAssemblyFactory) {
+        guard
+            let injectable = factory.resolver.unravel(InjectableType.self)
+        else { preconditionFailure("Could not to resolve value of type \(String(describing: InjectableType.self))") }
+        self.injectable = injectable
+    }
     
-    var readOnly: MainModuleReadOnlyState { get }
+    public init<Factory>(_ factoryType: Factory.Type) where Factory: AnyDIAssemblyFactory {
+        self.init(Factory())
+    }
 }
-
-/// Состояние модуля `Main`
-struct MainModuleState: ModuleState {    
-    
-    struct InitialState: ModuleInitialState {}
-    
-    struct FinalState: ModuleFinalState {}
-    
-    typealias InitialStateType = InitialState
-    typealias FinalStateType = FinalState
-    
-    var initialState: MainModuleState.InitialStateType?
-    var finalState: MainModuleState.FinalStateType?
-}
-
-// MARK: - MainModuleState +  ReadOnly
-extension MainModuleState: MainModuleReadOnlyState {}
