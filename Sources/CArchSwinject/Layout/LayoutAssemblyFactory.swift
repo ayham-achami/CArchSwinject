@@ -92,4 +92,11 @@ extension LayoutAssemblyFactory {
     public static func assembly<Module>(_ type: Module.Type) -> Resolver<Module> {
         .init(factory: .init())
     }
+    
+    /// <#Description#>
+    /// - Parameter type: <#type description#>
+    /// - Returns: <#description#>
+    public func assembly<Module>(_ type: Module.Type) -> Resolver<Module> {
+        .init(factory: self)
+    }
 }
