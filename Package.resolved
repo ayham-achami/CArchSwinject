@@ -6,7 +6,7 @@
       "location" : "https://github.com/ayham-achami/CArch.git",
       "state" : {
         "branch" : "feature/v-3.0.0",
-        "revision" : "5221c6c4efcbc25f1fba595b773735b7e90e68c4"
+        "revision" : "1412c5328b5c53ef5d64c7d03e7f15a610a51f57"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-syntax.git",
       "state" : {
-        "revision" : "67c5007099d9ffdd292f421f81f4efe5ee42963e",
-        "version" : "509.0.0-swift-DEVELOPMENT-SNAPSHOT-2023-07-10-a"
+        "revision" : "2e3c42cf38defd998c87ecfe8df138f925d22736",
+        "version" : "509.0.0-swift-DEVELOPMENT-SNAPSHOT-2023-08-15-a"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Swinject/SwinjectStoryboard.git",
       "state" : {
-        "revision" : "a39bd7abe7e7427f9a0929a402cf2d1916fa5d50",
-        "version" : "2.2.2"
+        "revision" : "e4498ce2dfe37e1ca9d2d20af06fcc087507561c",
+        "version" : "2.2.3"
       }
     }
   ],

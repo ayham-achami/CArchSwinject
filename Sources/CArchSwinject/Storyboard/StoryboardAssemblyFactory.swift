@@ -59,6 +59,10 @@ public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, S
     public func record<Recorder>(_ recorder: Recorder.Type) where Recorder: ServicesRecorder {
         recorder.init().all.forEach { Self.provider.apply(ServicesApplying($0)) }
     }
+    
+    public func record<Recorder>(_ recorder: Recorder) where Recorder: DIAssemblyCollection {
+        recorder.forEach { Self.provider.apply(ServicesApplying($0)) }
+    }
 }
 
 // MARK: - SwinjectStoryboard
