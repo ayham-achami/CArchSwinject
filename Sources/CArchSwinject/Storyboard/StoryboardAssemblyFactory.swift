@@ -61,7 +61,7 @@ public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, S
     }
     
     public func record<Recorder>(_ recorder: Recorder) where Recorder: DIAssemblyCollection {
-        recorder.forEach { Self.provider.apply(ServicesApplying($0)) }
+        recorder.services.forEach { Self.provider.apply(ServicesApplying($0)) }
     }
 }
 
