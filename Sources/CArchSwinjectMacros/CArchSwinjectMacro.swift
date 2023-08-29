@@ -1,4 +1,3 @@
-#if canImport(SwiftSyntaxMacros) && canImport(SwiftCompilerPlugin)
 import SwiftSyntaxMacros
 import SwiftCompilerPlugin
 
@@ -7,4 +6,3 @@ struct CArchSwinjectPlugin: CompilerPlugin {
     
     let providingMacros: [Macro.Type] = []
 }
-#endif
