@@ -6,7 +6,7 @@
       "location" : "https://github.com/ayham-achami/CArch.git",
       "state" : {
         "branch" : "feature/v-3.0.0",
-        "revision" : "147eaebdd6f06d7e159c495d9cd4b03ed8fcf7d2"
+        "revision" : "84c8d03215fa020577a04c1cb4b5e1d5e5b74157"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-syntax.git",
       "state" : {
-        "revision" : "2e3c42cf38defd998c87ecfe8df138f925d22736",
-        "version" : "509.0.0-swift-DEVELOPMENT-SNAPSHOT-2023-08-15-a"
+        "revision" : "057bdfb4632cc758973d46efaf98e43d07ee4bdb",
+        "version" : "509.0.0-swift-DEVELOPMENT-SNAPSHOT-2023-08-28-a"
       }
     },
     {
