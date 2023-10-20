@@ -5,8 +5,8 @@
         "package": "CArch",
         "repositoryURL": "https://github.com/ayham-achami/CArch.git",
         "state": {
-          "branch": "mainline",
-          "revision": "88477e31d28046a85eefeccabafcf84fb642dfac",
+          "branch": "feature/fix-module-components",
+          "revision": "2d5267c27974d7f5076e81f313c0b9ee9b4b01f5",
           "version": null
         }
       },

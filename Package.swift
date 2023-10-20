@@ -9,7 +9,7 @@ let package = Package(name: "CArchSwinject",
                       // Products
                       products: [.library(name: "CArchSwinject", targets: ["CArchSwinject"])],
                       // Dependencies
-                      dependencies: [.package(name: "CArch" , url: "https://github.com/ayham-achami/CArch.git", .branch("mainline")),
+                      dependencies: [.package(name: "CArch" , url: "https://github.com/ayham-achami/CArch.git", .branch("feature/fix-module-components")),
                                      .package(name: "Swinject", url: "https://github.com/Swinject/Swinject.git", .upToNextMajor(from: "2.8.3")),
                                      .package(name: "SwinjectStoryboard", url: "https://github.com/Swinject/SwinjectStoryboard.git", from: "2.2.2")],
                       // Targets

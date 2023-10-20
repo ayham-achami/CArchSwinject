@@ -28,13 +28,13 @@ import Swinject
 
 // MARK: - Container + DIRegistrar
 extension Container: DIRegistrar {
-
+    
     // swiftlint:disable force_cast
     public func record<Service>(_ serviceType: Service.Type,
                                 name: String,
                                 inScope storage: StorageType,
                                 factory: @escaping (DIResolver) -> Service) {
-        guard !hasAnyRegistration(of: serviceType, name: name) else { return }
+        guard isRegistrationNeeded(serviceType, name: name) else { return }
         register(serviceType, name: name) { resolver -> Service in
             factory(resolver as! DIResolver)
         }
@@ -44,7 +44,7 @@ extension Container: DIRegistrar {
     public func record<Service>(_ serviceType: Service.Type,
                                 inScope storage: StorageType,
                                 factory: @escaping (DIResolver) -> Service) {
-        guard !hasAnyRegistration(of: serviceType) else { return }
+        guard !isRegistrationNeeded(serviceType) else { return }
         register(serviceType) { resolver -> Service in
             factory(resolver as! DIResolver)
         }
@@ -54,7 +54,7 @@ extension Container: DIRegistrar {
     public func record<Service, Arg>(_ serviceType: Service.Type,
                                      inScope storage: StorageType,
                                      factory: @escaping (DIResolver, Arg) -> Service) {
-        guard !hasAnyRegistration(of: serviceType) else { return }
+        guard !isRegistrationNeeded(serviceType) else { return }
         register(serviceType) { (resolver, arg: Arg) -> Service in
             factory(resolver as! DIResolver, arg)
         }
@@ -64,11 +64,18 @@ extension Container: DIRegistrar {
     public func record<Service, Arg1, Arg2>(_ serviceType: Service.Type,
                                             inScope storage: StorageType,
                                             factory: @escaping (DIResolver, Arg1, Arg2) -> Service) {
-        guard !hasAnyRegistration(of: serviceType) else { return }
+        guard !isRegistrationNeeded(serviceType) else { return }
         register(serviceType) { (resolver, arg1: Arg1, arg2: Arg2) -> Service in
             factory(resolver as! DIResolver, arg1, arg2)
         }
         .inObjectScope(storage.scope)
+    }
+    
+    private func isRegistrationNeeded<Service>(_ serviceType: Service.Type, name: String? = nil) -> Bool {
+        if !hasAnyRegistration(of: serviceType, name: name) || serviceType is CArchModuleComponent.Type {
+            return true
+        }
+        return false
     }
     // swiftlint:enable force_cast
 }

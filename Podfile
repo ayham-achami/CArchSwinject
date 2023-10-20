@@ -10,7 +10,7 @@ def common_pods
   # Control
   pod 'SwiftLint'
   # Architecture
-  pod 'CArch', :git => 'https://github.com/ayham-achami/CArch.git', :branch => 'mainline'
+  pod 'CArch', :git => 'https://github.com/ayham-achami/CArch.git', :branch => 'feature/fix-module-components'
   # Dependency injection
   pod 'Swinject'
   pod 'SwinjectStoryboard'
