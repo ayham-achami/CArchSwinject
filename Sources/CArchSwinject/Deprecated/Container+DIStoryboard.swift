@@ -1,5 +1,5 @@
 //
-//  StoryboardModuleApplying.swift
+//  Container+DIStoryboard.swift
 //
 //  The MIT License (MIT)
 //
@@ -24,25 +24,20 @@
 //  SOFTWARE.
 
 import CArch
+import UIKit
 import Swinject
+import SwinjectStoryboard
 
-/// Вспомогательный класс для регистрации модуля в контейнер зависимости
-class StoryboardModuleApplying: Assembly {
-    
-    /// Модуль для сборки
-    let moduleAssembly: StoryboardModuleAssembly
+// MARK: - Container + DIStoryboard
+extension Container: DIStoryboard {
 
-    /// Инициализации с любым модулем
-    ///
-    /// - Parameter anyModuleAssembly: Любой модуль
-    init(_ moduleAssembly: StoryboardModuleAssembly) {
-        self.moduleAssembly = moduleAssembly
-    }
-
-    func assemble(container: Container) {
-        moduleAssembly.registerView(in: container)
-        moduleAssembly.registerPresenter(in: container)
-        moduleAssembly.registerProvider(in: container)
-        moduleAssembly.registerRouter(in: container)
+    @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
+    public func setInitCompleted<Controller>(for controllerType: Controller.Type,
+                                             name: String?,
+                                             initCompleted: @escaping (DIResolver, Controller) -> Void) where Controller: UIViewController {
+        storyboardInitCompleted(controllerType, name: name) { resolver, controller in
+            guard let resolver = resolver as? DIResolver else { return }
+            initCompleted(resolver, controller)
+        }
     }
 }

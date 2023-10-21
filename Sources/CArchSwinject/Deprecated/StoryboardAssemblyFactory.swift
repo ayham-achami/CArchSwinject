@@ -29,6 +29,7 @@ import Foundation
 import SwinjectStoryboard
 
 /// Фабрика создания и внедрение зависимости
+@available(*, deprecated, message: "Use LayoutAssemblyFactory")
 public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, SwinjectStoryboardProtocol {
     
     static var provider = SwinjectProvider(.init())
@@ -62,19 +63,5 @@ public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, S
     
     public func record<Recorder>(_ recorder: Recorder) where Recorder: DIAssemblyCollection {
         recorder.services.forEach { Self.provider.apply(ServicesApplying($0)) }
-    }
-}
-
-// MARK: - SwinjectStoryboard
-extension SwinjectStoryboard {
-
-    @objc
-    public class func setup() {
-        StoryboardAssemblyFactory.provider = .init(.init(container: defaultContainer))
-        guard
-            StoryboardAssemblyFactory.conforms(to: SwinjectStoryboardProtocol.self),
-            StoryboardAssemblyFactory.responds(to: #selector(setup))
-        else { return }
-        StoryboardAssemblyFactory.perform(#selector(setup))
     }
 }

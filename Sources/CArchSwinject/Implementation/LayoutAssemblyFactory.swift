@@ -54,7 +54,7 @@ public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {
         recorder.init().all.forEach { Self.provider.apply(ServicesApplying($0)) }
     }
     
-    public func record<Recorder>(_ recorder: Recorder) where Recorder : DIAssemblyCollection {
+    public func record<Recorder>(_ recorder: Recorder) where Recorder: DIAssemblyCollection {
         recorder.services.forEach { Self.provider.apply(ServicesApplying($0)) }
     }
 }
@@ -62,26 +62,26 @@ public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {
 // MARK: - LayoutAssemblyFactory + Resolver
 extension LayoutAssemblyFactory {
     
-    /// <#Description#>
+    /// Объект получение модуля из контейнера зависимости
     public struct Resolver<Assembly> where Assembly: AnyObject, Assembly: LayoutModuleAssembly {
         
         public typealias Weak = StorageType.WeakReference<Assembly>
         
-        /// <#Description#>
+        /// Слабая ссылка на сборщик модуля
         private let reference: Weak
-        /// <#Description#>
+        /// Фабрика зависимости
         private let factory: LayoutAssemblyFactory
         
-        /// <#Description#>
-        /// - Parameter factory: <#factory description#>
+        /// Инициализация
+        /// - Parameter factory: Фабрика зависимости
         public init(factory: LayoutAssemblyFactory) {
             self.factory = factory
             self.reference = .init(factory.assembly(Assembly()))
         }
         
-        /// <#Description#>
-        /// - Parameter moduleType: <#moduleType description#>
-        /// - Returns: <#description#>
+        /// Получение объекта из контейнера зависимости
+        /// - Parameter moduleType: Тип модуля
+        /// - Returns: Объекта из контейнера зависимости
         public func unravel<Module>(_ moduleType: Module.Type) -> Module where Module: CArchModule {
             guard
                 let module = factory.resolver.unravel(moduleType)
@@ -90,16 +90,16 @@ extension LayoutAssemblyFactory {
         }
     }
     
-    /// <#Description#>
-    /// - Parameter type: <#type description#>
-    /// - Returns: <#description#>
+    /// Собрать модуля
+    /// - Parameter type: Тип модуля
+    /// - Returns: Объект получение модуля из контейнера зависимости
     public static func assembly<Module>(_ type: Module.Type) -> Resolver<Module> {
         .init(factory: .init())
     }
     
-    /// <#Description#>
-    /// - Parameter type: <#type description#>
-    /// - Returns: <#description#>
+    /// Собрать модуля
+    /// - Parameter type: Тип модуля
+    /// - Returns: Объект получение модуля из контейнера зависимости
     public func assembly<Module>(_ type: Module.Type) -> Resolver<Module> {
         .init(factory: self)
     }

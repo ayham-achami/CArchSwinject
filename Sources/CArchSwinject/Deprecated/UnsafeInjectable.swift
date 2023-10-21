@@ -1,3 +1,6 @@
+//
+//  UnsafeInjectable.swift
+//
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2019 Community Arch
@@ -20,27 +23,26 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+import CArch
 import Foundation
 
-struct Movie: Codable {
+// MARK: - UnsafeInjectable
+@available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
+@propertyWrapper
+public struct UnsafeInjectable<InjectableType> {
 
-    let id: Int
-    let voteCount: Int
+    private var injectable: InjectableType
 
-    let genreIds: [Int]
+    public var wrappedValue: InjectableType { injectable }
 
-    let popularity: Double
-    let voteAverage: Double
-
-    let video: Bool
-    let adult: Bool
-
-    let title: String
-    let overview: String
-    let posterPath: String?
-    let backdropPath: String?
-    let originalTitle: String
-    let originalLanguage: String
-
-    let releaseDate: Date
+    public init(_ factory: AnyDIAssemblyFactory) {
+        guard
+            let injectable = factory.resolver.unravel(InjectableType.self)
+        else { preconditionFailure("Could not to resolve value of type \(String(describing: InjectableType.self))") }
+        self.injectable = injectable
+    }
+    
+    public init<Factory>(_ factoryType: Factory.Type) where Factory: AnyDIAssemblyFactory {
+        self.init(Factory())
+    }
 }

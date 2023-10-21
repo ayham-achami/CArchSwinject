@@ -6,6 +6,7 @@ import CompilerPluginSupport
 
 let package = Package(
     name: "CArchSwinject",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v13),
         .macOS(.v13),
@@ -26,11 +27,11 @@ let package = Package(
         ),
     ],
     dependencies: [
-        //.package(url: "https://github.com/realm/SwiftLint", from: "0.52.4"),
+        .package(url: "https://github.com/realm/SwiftLint", from: "0.52.4"),
         .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.3"),
+        .package(url: "https://github.com/apple/swift-syntax.git", from: "509.0.0"),
         .package(url: "https://github.com/Swinject/SwinjectStoryboard.git", from: "2.2.2"),
-        .package(url: "https://github.com/ayham-achami/CArch.git", branch: "feature/v-3.0.0"),
-        .package(url: "https://github.com/apple/swift-syntax.git", from: "509.0.0-swift-5.9-DEVELOPMENT-SNAPSHOT-2023-04-25-b"),
+        .package(url: "https://github.com/ayham-achami/CArch.git", branch: "feature/v-3.0.0")
     ],
     targets: [
         .macro(
@@ -38,8 +39,10 @@ let package = Package(
             dependencies: [
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax")
+            ],
+            plugins: [
+                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]
-            //plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
         ),
         .target(
             name: "CArchSwinject",
@@ -50,15 +53,19 @@ let package = Package(
             ],
             exclude: [
                 "Info.plist"
+            ],
+            plugins: [
+                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]
-            //plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
         ),
         .executableTarget(
             name: "CArchSwinjectClient",
             dependencies: [
                 "CArchSwinject"
+            ],
+            plugins: [
+                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]
-            //plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
         ),
         .testTarget(
             name: "CArchSwinjectTests",
@@ -68,9 +75,12 @@ let package = Package(
             path: "CArchSwinjectTests",
             exclude: [
                 "Info.plist"
+            ],
+            plugins: [
+                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]
-            //plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
         ),
     ],
     swiftLanguageVersions: [.v5]
 )
+

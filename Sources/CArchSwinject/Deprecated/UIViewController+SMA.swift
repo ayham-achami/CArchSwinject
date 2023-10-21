@@ -1,3 +1,6 @@
+//
+//  UIViewController+SMA.swift
+//
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2019 Community Arch
@@ -23,15 +26,12 @@
 import UIKit
 import CArch
 
-/// Протокол организующий логику переходов от модуля `Movies` в другие модули
-protocol MoviesRoutingLogic: RootRoutingLogic {}
-
-/// Объект содержаний логику переходов от модуля `Movies` в другие модули
-final class MoviesRouter: MoviesRoutingLogic {
-
-    private unowned let transitionController: TransitionController
-
-    nonisolated init(transitionController: TransitionController) {
-        self.transitionController = transitionController
+// MARK: - UIViewController + ModuleAssembler
+extension UIViewController: StoryboardModuleAssembler {
+    
+    @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
+    public static func assembly<Module>(_ type: Module.Type) ->
+        StorageType.WeakReference<Module> where Module: AnyObject, Module: StoryboardModuleAssembly {
+        .init(StoryboardAssemblyFactory().assembly(Module()))
     }
 }

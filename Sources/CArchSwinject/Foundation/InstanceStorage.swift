@@ -98,16 +98,13 @@ final class AlwaysNewInstanceStorageFactory: InstanceStorage {
 extension ObjectScope {
 
     /// Хранилище ссылок типа Singleton
-    public static let singleton = ObjectScope(storageFactory: SingletonStorageFactory.init,
-                                              description: "Singleton")
+    public static let singleton = ObjectScope(storageFactory: SingletonStorageFactory.init, description: "Singleton")
 
     /// Хранилище ссылок типа автоматическое освобождение
-    public static let autoRelease = ObjectScope(storageFactory: AutoReleaseStorageFactory.init,
-                                                description: "AutoRelease")
+    public static let autoRelease = ObjectScope(storageFactory: AutoReleaseStorageFactory.init, description: "AutoRelease")
 
     /// Хранилище ссылок типа всегда новый экземпляр
-    public static let alwaysNewInstance = ObjectScope(storageFactory: AlwaysNewInstanceStorageFactory.init,
-                                                      description: "AlwaysNewInstance")
+    public static let alwaysNewInstance = ObjectScope(storageFactory: AlwaysNewInstanceStorageFactory.init, description: "AlwaysNewInstance")
 }
 
 // MARK: - StorageType + ObjectScope

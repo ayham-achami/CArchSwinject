@@ -1,3 +1,6 @@
+//
+//  StoryboardModuleApplying.swift
+//
 //  The MIT License (MIT)
 //
 //  Copyright (c) 2019 Community Arch
@@ -21,29 +24,26 @@
 //  SOFTWARE.
 
 import CArch
+import Swinject
 
-/// Протокол передающий доступ к некоторым свойствам состояние модуля `Main` как только для чтения
-protocol MainModuleReadOnlyState: AnyReadOnlyState {}
-
-/// Протокол передающий доступ к состоянию модуля как только для чтения
-protocol MainModuleStateRepresentable: AnyModuleStateRepresentable {
+/// Вспомогательный класс для регистрации модуля в контейнер зависимости
+@available(*, deprecated, message: "Use LayoutModuleApplying")
+class StoryboardModuleApplying: Assembly {
     
-    var readOnly: MainModuleReadOnlyState { get }
+    /// Модуль для сборки
+    let moduleAssembly: StoryboardModuleAssembly
+
+    /// Инициализации с любым модулем
+    ///
+    /// - Parameter anyModuleAssembly: Любой модуль
+    init(_ moduleAssembly: StoryboardModuleAssembly) {
+        self.moduleAssembly = moduleAssembly
+    }
+
+    func assemble(container: Container) {
+        moduleAssembly.registerView(in: container)
+        moduleAssembly.registerPresenter(in: container)
+        moduleAssembly.registerProvider(in: container)
+        moduleAssembly.registerRouter(in: container)
+    }
 }
-
-/// Состояние модуля `Main`
-struct MainModuleState: ModuleState {    
-    
-    struct InitialState: ModuleInitialState {}
-    
-    struct FinalState: ModuleFinalState {}
-    
-    typealias InitialStateType = InitialState
-    typealias FinalStateType = FinalState
-    
-    var initialState: MainModuleState.InitialStateType?
-    var finalState: MainModuleState.FinalStateType?
-}
-
-// MARK: - MainModuleState +  ReadOnly
-extension MainModuleState: MainModuleReadOnlyState {}
