@@ -32,7 +32,11 @@ import SwinjectStoryboard
 @available(*, deprecated, message: "Use LayoutAssemblyFactory")
 public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, SwinjectStoryboardProtocol {
     
-    static var provider = SwinjectProvider(.init())
+    public static func set(isDebugEnabled: Bool) {
+        Container.loggingFunction = isDebugEnabled ? { print($0) } : nil
+    }
+    
+    static var provider = SwinjectProvider()
 
     public var storyboardContainer: DIStoryboardContainer {
         Self.provider.container
@@ -63,5 +67,21 @@ public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, S
     
     public func record<Recorder>(_ recorder: Recorder) where Recorder: DIAssemblyCollection {
         recorder.services.forEach { Self.provider.apply(ServicesApplying($0)) }
+    }
+}
+
+// MARK: - SwinjectStoryboard
+@available(*, deprecated, message: "Use LayoutAssemblyFactory")
+extension SwinjectStoryboard {
+
+    @objc
+    public class func setup() {
+        StoryboardAssemblyFactory.provider = .init(parentContainer: defaultContainer)
+        LayoutAssemblyFactory.provider = .init(parentContainer: defaultContainer)
+        guard
+            StoryboardAssemblyFactory.conforms(to: SwinjectStoryboardProtocol.self),
+            StoryboardAssemblyFactory.responds(to: #selector(setup))
+        else { return }
+        StoryboardAssemblyFactory.perform(#selector(setup))
     }
 }

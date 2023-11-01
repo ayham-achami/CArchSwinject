@@ -1,5 +1,5 @@
 //
-//  CArchSwinjectTests.swift
+//  UIViewController+LMA.swift
 //
 //  The MIT License (MIT)
 //
@@ -23,12 +23,16 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import XCTest
-@testable import CArchSwinject
+#if canImport(UIKit)
+import UIKit
+import CArch
 
-class CArchSwinjectTests: XCTestCase {
+// MARK: - UIViewController + ModuleAssembler
+@available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
+extension UIViewController: LayoutModuleAssembler {
     
-    func testPrint() {
-        print("Has test passed")
+    public static func assembly<Module>(_ type: Module.Type) -> StorageType.WeakReference<Module> where Module: AnyObject, Module: LayoutModuleAssembly {
+        .init(LayoutAssemblyFactory().assembly(Module()))
     }
 }
+#endif

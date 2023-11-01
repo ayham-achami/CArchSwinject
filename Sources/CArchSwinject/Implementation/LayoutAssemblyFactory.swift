@@ -27,9 +27,13 @@ import CArch
 import Swinject
 
 /// Фабрика создания и внедрение зависимости
-public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {    
+public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {
     
-    static var provider = SwinjectProvider(.init())
+    public static func set(isDebugEnabled: Bool) {
+        Container.loggingFunction = isDebugEnabled ? { print($0) } : nil
+    }
+    
+    static var provider: SwinjectProvider!
     
     public var layoutContainer: DIContainer {
         Self.provider.container
@@ -50,6 +54,7 @@ public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {
         return module
     }
     
+    @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
     public func record<Recorder>(_ recorder: Recorder.Type) where Recorder: ServicesRecorder {
         recorder.init().all.forEach { Self.provider.apply(ServicesApplying($0)) }
     }
@@ -82,25 +87,22 @@ extension LayoutAssemblyFactory {
         /// Получение объекта из контейнера зависимости
         /// - Parameter moduleType: Тип модуля
         /// - Returns: Объекта из контейнера зависимости
-        public func unravel<Module>(_ moduleType: Module.Type) -> Module where Module: CArchModule {
-            guard
-                let module = factory.resolver.unravel(moduleType)
-            else { preconditionFailure("Couldn't to resolve \(String(describing: Module.self))") }
-            return module
+        public func unravel<Module>(_: Module.Type) -> Module where Module: CArchModule {
+            factory.resolver.unravelModule(Module.self)
         }
     }
     
     /// Собрать модуля
     /// - Parameter type: Тип модуля
     /// - Returns: Объект получение модуля из контейнера зависимости
-    public static func assembly<Module>(_ type: Module.Type) -> Resolver<Module> {
+    public static func assembly<Module>(_: Module.Type) -> Resolver<Module> {
         .init(factory: .init())
     }
     
     /// Собрать модуля
     /// - Parameter type: Тип модуля
     /// - Returns: Объект получение модуля из контейнера зависимости
-    public func assembly<Module>(_ type: Module.Type) -> Resolver<Module> {
+    public func assembly<Module>(_: Module.Type) -> Resolver<Module> {
         .init(factory: self)
     }
 }

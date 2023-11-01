@@ -29,6 +29,7 @@ import Swinject
 import SwinjectStoryboard
 
 // MARK: - Container + DIStoryboard
+@available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
 extension Container: DIStoryboard {
 
     @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")

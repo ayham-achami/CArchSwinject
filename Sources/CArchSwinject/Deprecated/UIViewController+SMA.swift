@@ -27,6 +27,7 @@ import UIKit
 import CArch
 
 // MARK: - UIViewController + ModuleAssembler
+@available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
 extension UIViewController: StoryboardModuleAssembler {
     
     @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")

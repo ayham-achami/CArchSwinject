@@ -26,6 +26,18 @@
 import CArch
 import Swinject
 
+/// Хранилище ссылок типа всегда новый экземпляр
+/// всегда будет создан новый экземпляр объекта
+final class FleetingStorage: InstanceStorage {
+    
+    public var instance: Any? {
+        get { return nil }
+        set {} // swiftlint:disable:this unused_setter_value
+    }
+
+    public init() {}
+}
+
 /// Хранилище ссылок типа Singleton
 /// сохраняет ссылку до тех пор, пока Container живой
 final class SingletonStorageFactory: InstanceStorage {
@@ -71,6 +83,7 @@ final class AutoReleaseStorageFactory: InstanceStorage {
 /// Хранилище ссылок типа всегда новый экземпляр но в отличии от `AutoRelease`
 /// всегда будет создан новый экземпляр объекта
 /// сохраняет ссылку до тех пор, пока есть сильные ссылки на экземпляр объекта.
+@available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
 final class AlwaysNewInstanceStorageFactory: InstanceStorage {
 
     private var instances = [GraphIdentifier: StorageType.WeakReference<AnyObject>]()
@@ -97,6 +110,9 @@ final class AlwaysNewInstanceStorageFactory: InstanceStorage {
 // MARK: - ObjectScope
 extension ObjectScope {
 
+    /// Хранилище ссылок типа fleeting
+    public static let fleeting = ObjectScope(storageFactory: FleetingStorage.init, description: "Fleeting")
+    
     /// Хранилище ссылок типа Singleton
     public static let singleton = ObjectScope(storageFactory: SingletonStorageFactory.init, description: "Singleton")
 
@@ -104,6 +120,7 @@ extension ObjectScope {
     public static let autoRelease = ObjectScope(storageFactory: AutoReleaseStorageFactory.init, description: "AutoRelease")
 
     /// Хранилище ссылок типа всегда новый экземпляр
+    @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
     public static let alwaysNewInstance = ObjectScope(storageFactory: AlwaysNewInstanceStorageFactory.init, description: "AlwaysNewInstance")
 }
 
@@ -111,8 +128,11 @@ extension ObjectScope {
 extension StorageType {
 
     /// Тип ссылки для Swinject
+    @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
     var scope: Swinject.ObjectScope {
         switch self {
+        case .fleeting:
+            return .fleeting
         case .singleton:
             return .singleton
         case .autoRelease:
