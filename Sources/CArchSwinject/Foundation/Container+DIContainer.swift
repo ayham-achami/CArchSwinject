@@ -179,8 +179,8 @@ extension Container: DIRegistrar {
     }
 }
 
-// MARK: - Container + DIResolver
-extension Container: DIResolver {
+// MARK: - Container + BusinessLogicResolver
+extension Container: BusinessLogicResolver {
     
     public func unravelAgent<Agent>(_: Agent.Type) -> Agent where Agent: CArch.BusinessLogicAgent {
         synchronize().resolve(Lazy<Agent>.self)!.instance
@@ -197,6 +197,10 @@ extension Container: DIResolver {
     public func unravelEngine<Engine>(_: Engine.Type, configuration: CArch.EngineConfiguration) -> Engine where Engine: CArch.BusinessLogicEngine {
         synchronize().resolve(Lazy<Engine>.self, name: configuration.rawValue)!.instance
     }
+}
+
+// MARK: - Container + ModuleComponentResolver
+extension Container: ModuleComponentResolver {
     
     public func unravelModule<Module>(_: Module.Type) -> Module where Module: CArchModule {
         synchronize().resolve(Provider<Module>.self)!.instance
@@ -206,22 +210,34 @@ extension Container: DIResolver {
         synchronize().resolve(Provider<Component>.self)!.instance
     }
     
-    public func unravelComponent<Component, Argument>(_: Component.Type, 
+    public func unravelComponent<Component, Argument>(_: Component.Type,
                                                       argument: Argument) -> Component where Component: CArch.CArchModuleComponent {
         synchronize().resolve(Provider<Component>.self, argument: argument)!.instance
     }
     
-    public func unravelComponent<Component, Argument1, Argument2>(_: Component.Type, 
+    public func unravelComponent<Component, Argument1, Argument2>(_: Component.Type,
                                                                   argument1: Argument1,
                                                                   argument2: Argument2) -> Component where Component: CArch.CArchModuleComponent {
         synchronize().resolve(Provider<Component>.self, arguments: argument1, argument2)!.instance
     }
     
-    public func unravelComponent<Component, Argument1, Argument2, Argument3>(_: Component.Type, 
+    public func unravelComponent<Component, Argument1, Argument2, Argument3>(_: Component.Type,
                                                                              argument1: Argument1,
                                                                              argument2: Argument2,
                                                                              argument3: Argument3) -> Component where Component: CArch.CArchModuleComponent {
         synchronize().resolve(Provider<Component>.self, arguments: argument1, argument2, argument3)!.instance
+    }
+}
+
+// MARK: - Container + DIResolver
+extension Container: DIResolver {
+    
+    public func unravel<Service>(some _: Service.Type) -> Service {
+        synchronize().resolve(Service.self)!
+    }
+    
+    public func unravel<Service>(some _: Service.Type, configuration: any InjectConfiguration) -> Service {
+        synchronize().resolve(Service.self, name: configuration.rawValue)!
     }
 
     @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
