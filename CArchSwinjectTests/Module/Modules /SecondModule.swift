@@ -1,9 +1,11 @@
+//
+//  SecondModule.swift
+//
 
-
-import UIKit
 import CArch
-import Foundation
 import CArchSwinject
+import Foundation
+import UIKit
 
 @SyncAlias
 protocol SecondProvisionLogic: RootProvisionLogic, ErrorAsyncHandler {

@@ -70,7 +70,8 @@ extension Container: ModuleComponentRegistrar {
                                                      factory: @escaping (DIResolver, Argument) -> Component) where Component: CArchModuleComponent {
         register(Component.self) { (resolver, arg: Argument) -> Component in
             factory(resolver.project, arg)
-        }.inObjectScope(.fleeting)
+        }
+        .inObjectScope(.fleeting)
     }
     
     public func recordComponent<Component, Argument1, Argument2>(_: Component.Type,

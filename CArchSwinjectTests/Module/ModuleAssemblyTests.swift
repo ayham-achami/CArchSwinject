@@ -1,9 +1,10 @@
 //
+//  ModuleAssemblyTests.swift
+//
 
-
-import XCTest
 import CArch
 @testable import CArchSwinject
+import XCTest
 
 final class ModuleAssemblyTests: XCTestCase {
     

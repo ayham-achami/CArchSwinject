@@ -1,9 +1,11 @@
+//
+//  ModuleComponentTests.swift
+//
 
-
-import XCTest
 import CArch
-import UIKit
 @testable import CArchSwinject
+import UIKit
+import XCTest
 
 class ModuleComponentTests: XCTestCase {
     

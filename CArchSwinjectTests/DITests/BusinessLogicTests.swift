@@ -1,4 +1,6 @@
-
+//
+//  BusinessLogicTests.swift
+//
 
 import XCTest
 import CArch
@@ -24,7 +26,6 @@ final class BusinessLogicTests: XCTestCase {
             func assemble(container: CArch.DIContainer) {
                 container.recordEngine(Engine.self, configuration: .testCase) { _ in .init(name: EngineConfiguration.testCase.rawValue) }
                 container.recordEngine(Engine.self) { _ in .init(name: "") }
-                
             }
         }
     }
