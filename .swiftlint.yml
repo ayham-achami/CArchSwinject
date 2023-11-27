@@ -70,7 +70,7 @@ implicit_return:
   severity: error
 attributes:
   always_on_same_line:
-    ["@MainActor", "@objc", "@frozen", "@IBOutlet", "@IBAction", "@IBSegueAction", "@ProvisionActor", "@MaintenanceActor"]
+    ["@MainActor", "@objc", "@frozen", "@IBOutlet", "@IBAction", "@IBSegueAction", "@ProvisionActor", "@MaintenanceActor", "@ContestableContext"]
   always_on_line_above:
     ["@UIContactor", "@SyncAlias", "@available", "@discardableResult"]
 file_header:
