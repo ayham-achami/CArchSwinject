@@ -51,9 +51,6 @@ let package = Package(
                 "Swinject",
                 "SwinjectStoryboard"
             ],
-            exclude: [
-                "Info.plist"
-            ],
             plugins: [
                 .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]
@@ -73,9 +70,6 @@ let package = Package(
                 "CArchSwinject"
             ],
             path: "CArchSwinjectTests",
-            exclude: [
-                "Info.plist"
-            ],
             plugins: [
                 .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]
@@ -84,3 +78,12 @@ let package = Package(
     swiftLanguageVersions: [.v5]
 )
 
+let defaultSettings: [SwiftSetting] = [.enableExperimentalFeature("StrictConcurrency=minimal")]
+package.targets.forEach { target in
+    if var settings = target.swiftSettings, !settings.isEmpty {
+        settings.append(contentsOf: defaultSettings)
+        target.swiftSettings = settings
+    } else {
+        target.swiftSettings = defaultSettings
+    }
+}
