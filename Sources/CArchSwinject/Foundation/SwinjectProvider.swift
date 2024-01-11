@@ -35,7 +35,7 @@ final class SwinjectProvider {
     /// - Parameter container: Контейнер внедрения зависимостей
     @available(*, deprecated, message: "Use init()")
     init(parentContainer: Container) {
-        self.container = .init(parent: parentContainer, behaviors: [ProviderBehavior()])
+        self.container = parentContainer
     }
     
     /// Применим сборщик к контейнеру
