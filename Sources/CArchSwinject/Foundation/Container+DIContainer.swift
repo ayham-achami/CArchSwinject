@@ -161,7 +161,7 @@ extension Container: DIRegistrar {
 
 // MARK: - Container + BusinessLogicResolver
 extension Container: BusinessLogicResolver {
-    
+
     public func unravelAgent<Agent>(_: Agent.Type) -> Agent where Agent: CArch.BusinessLogicAgent {
         synchronize().resolve(Lazy<Agent>.self)!.instance
     }
@@ -176,6 +176,14 @@ extension Container: BusinessLogicResolver {
     
     public func unravelEngine<Engine>(_: Engine.Type, configuration: CArch.EngineConfiguration) -> Engine where Engine: CArch.BusinessLogicEngine {
         synchronize().resolve(Lazy<Engine>.self, name: configuration.rawValue)!.instance
+    }
+    
+    public func unravelPool<Pool>(_: Pool.Type) -> Pool where Pool: CArch.BusinessLogicServicePool {
+        synchronize().resolve(Lazy<Pool>.self)!.instance
+    }
+    
+    public func unravelSingleton<Singleton>(_: Singleton.Type) -> Singleton where Singleton: CArch.BusinessLogicSingleton {
+        synchronize().resolve(Lazy<Singleton>.self)!.instance
     }
 }
 

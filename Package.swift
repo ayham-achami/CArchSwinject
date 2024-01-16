@@ -9,7 +9,7 @@ let package = Package(
     defaultLocalization: "en",
     platforms: [
         .iOS(.v13),
-        .macOS(.v13),
+        .macOS(.v12),
         .macCatalyst(.v13)
     ],
     products: [
@@ -37,6 +37,7 @@ let package = Package(
         .macro(
             name: "CArchSwinjectMacros",
             dependencies: [
+                "CArch",
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax")
             ],
@@ -49,7 +50,8 @@ let package = Package(
             dependencies: [
                 "CArch",
                 "Swinject",
-                "SwinjectStoryboard"
+                "SwinjectStoryboard",
+                "CArchSwinjectMacros"
             ],
             plugins: [
                 .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
@@ -58,6 +60,7 @@ let package = Package(
         .executableTarget(
             name: "CArchSwinjectClient",
             dependencies: [
+                "CArch",
                 "CArchSwinject"
             ],
             plugins: [

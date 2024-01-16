@@ -14,7 +14,7 @@ protocol SecondProvisionLogic: RootProvisionLogic, ErrorAsyncHandler {
 }
 
 @UIContactor
-protocol SecondRenderingLogic: RootRenderingLogic {
+@MainActor protocol SecondRenderingLogic: RootRenderingLogic {
     
     func display()
 }

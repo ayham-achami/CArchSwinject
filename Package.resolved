@@ -6,7 +6,7 @@
       "location" : "https://github.com/ayham-achami/CArch.git",
       "state" : {
         "branch" : "feature/v-3.0.0",
-        "revision" : "0210b075185da933a53fe8aedc628be27b0b9a95"
+        "revision" : "b5596470e8762d9d96dd49261db9b67fc854ae96"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/krzyzanowskim/CryptoSwift.git",
       "state" : {
-        "revision" : "db51c407d3be4a051484a141bf0bff36c43d3b1e",
-        "version" : "1.8.0"
+        "revision" : "7892a123f7e8d0fe62f9f03728b17bbd4f94df5c",
+        "version" : "1.8.1"
       }
     },
     {

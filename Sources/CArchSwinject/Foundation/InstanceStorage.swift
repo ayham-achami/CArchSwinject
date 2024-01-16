@@ -89,7 +89,7 @@ final class AlwaysNewInstanceStorageFactory: InstanceStorage {
 // MARK: - ObjectScope
 extension ObjectScope {
 
-    /// Хранилище ссылок типа fleeting
+    /// Хранилище ссылок типа fleeting (всегда новый экземпляр)
     public static let fleeting = ObjectScope(storageFactory: FleetingStorage.init, description: "Fleeting")
     
     /// Хранилище ссылок типа Singleton

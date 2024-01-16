@@ -2,9 +2,9 @@
 //  BusinessLogicTests.swift
 //
 
-import XCTest
 import CArch
 @testable import CArchSwinject
+import XCTest
 
 extension EngineConfiguration {
     

@@ -2,7 +2,6 @@
 //  FirstModule.swift
 //
 
-
 import CArch
 import CArchSwinject
 import Foundation
@@ -15,7 +14,7 @@ protocol FirstProvisionLogic: RootProvisionLogic, ErrorAsyncHandler {
 }
 
 @UIContactor
-protocol FirstRenderingLogic: RootRenderingLogic {
+@MainActor protocol FirstRenderingLogic: RootRenderingLogic {
     
     func display()
 }
