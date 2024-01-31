@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ayham-achami/CArch.git",
       "state" : {
-        "branch" : "feature/v-3.0.0",
-        "revision" : "d6966b4083ce0b3ef40376b4513c68baafa7f601"
+        "revision" : "28f871c60c1fb54dfa3b612b623ccee023ed5c10",
+        "version" : "3.0.0"
       }
     },
     {
