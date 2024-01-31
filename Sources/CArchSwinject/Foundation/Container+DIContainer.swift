@@ -70,26 +70,44 @@ extension Container: ModuleComponentRegistrar {
                                                      factory: @escaping (DIResolver, Argument) -> Component) where Component: CArchModuleComponent {
         register(Component.self) { (resolver, arg: Argument) -> Component in
             factory(resolver.project, arg)
-        }
-        .inObjectScope(.fleeting)
+        }.inObjectScope(.fleeting)
     }
     
     public func recordComponent<Component, Argument1, Argument2>(_: Component.Type,
                                                                  factory: @escaping (DIResolver, Argument1, Argument2) -> Component) where Component: CArchModuleComponent {
         register(Component.self) { (resolver, arg1: Argument1, arg2: Argument2) -> Component in
             factory(resolver.project, arg1, arg2)
-        }
-        .inObjectScope(.fleeting)
+        }.inObjectScope(.fleeting)
     }
     
     public func recordComponent<Component, Argument1, Argument2, Argument3>(_: Component.Type,
                                                                             factory: @escaping (DIResolver, Argument1, Argument2, Argument3) -> Component) where Component: CArchModuleComponent {
         register(Component.self) { (resolver, arg1: Argument1, arg2: Argument2, arg3: Argument3) -> Component in
             factory(resolver.project, arg1, arg2, arg3)
+        }.inObjectScope(.fleeting)
+    }
+}
+
+// MARK: - Container + DIRegistrar
+extension Container: DIRegistrar {
+    
+    public func record<Service>(some _: Service.Type, inScope storage: StorageType, configuration: (any InjectConfiguration)?, factory: @escaping (DIResolver) -> Service) {
+        let entry = register(Service.self, name: configuration?.rawValue) { resolver -> Service in
+            factory(resolver.project)
         }
-        .inObjectScope(.fleeting)
+        switch storage {
+        case .fleeting:
+            entry.inObjectScope(.fleeting)
+        case .singleton:
+            entry.inObjectScope(.singleton)
+        case .autoRelease:
+            entry.inObjectScope(.autoRelease)
+        case .alwaysNewInstance:
+            preconditionFailure("Try to use deprecated storage alwaysNewInstance")
+        }
     }
     
+    @available(*, deprecated, renamed: "record(some:inScope:configuration:factory:)")
     public func record<Service>(_: Service.Type,
                                 inScope storage: CArch.StorageType,
                                 configuration: (any CArch.InjectConfiguration)?,
@@ -108,10 +126,6 @@ extension Container: ModuleComponentRegistrar {
             preconditionFailure("Try to use deprecated storage alwaysNewInstance")
         }
     }
-}
-
-// MARK: - Container + DIRegistrar
-extension Container: DIRegistrar {
     
     @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
     public func record<Service>(_ serviceType: Service.Type,
@@ -121,8 +135,7 @@ extension Container: DIRegistrar {
         guard !hasAnyRegistration(of: serviceType, name: name) else { return }
         register(serviceType, name: name) { resolver -> Service in
             factory(resolver.project)
-        }
-        .inObjectScope(storage.scope)
+        }.inObjectScope(storage.scope)
     }
 
     @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
@@ -132,8 +145,7 @@ extension Container: DIRegistrar {
         guard !hasAnyRegistration(of: serviceType) else { return }
         register(serviceType) { resolver -> Service in
             factory(resolver.project)
-        }
-        .inObjectScope(storage.scope)
+        }.inObjectScope(storage.scope)
     }
 
     @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
@@ -143,8 +155,7 @@ extension Container: DIRegistrar {
         guard !hasAnyRegistration(of: serviceType) else { return }
         register(serviceType) { (resolver, arg: Arg) -> Service in
             factory(resolver.project, arg)
-        }
-        .inObjectScope(storage.scope)
+        }.inObjectScope(storage.scope)
     }
 
     @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
@@ -154,8 +165,7 @@ extension Container: DIRegistrar {
         guard !hasAnyRegistration(of: serviceType) else { return }
         register(serviceType) { (resolver, arg1: Arg1, arg2: Arg2) -> Service in
             factory(resolver.project, arg1, arg2)
-        }
-        .inObjectScope(storage.scope)
+        }.inObjectScope(storage.scope)
     }
 }
 
