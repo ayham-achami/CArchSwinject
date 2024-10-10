@@ -90,17 +90,17 @@ final class AlwaysNewInstanceStorageFactory: InstanceStorage {
 extension ObjectScope {
 
     /// Хранилище ссылок типа fleeting (всегда новый экземпляр)
-    public static let fleeting = ObjectScope(storageFactory: FleetingStorage.init, description: "Fleeting")
+    static let fleeting = ObjectScope(storageFactory: FleetingStorage.init, description: "Fleeting")
     
     /// Хранилище ссылок типа Singleton
-    public static let singleton = ObjectScope(storageFactory: SingletonStorageFactory.init, description: "Singleton")
+    static let singleton = ObjectScope(storageFactory: SingletonStorageFactory.init, description: "Singleton")
 
     /// Хранилище ссылок типа автоматическое освобождение
-    public static let autoRelease = ObjectScope(storageFactory: AutoReleaseStorageFactory.init, description: "AutoRelease")
+    static let autoRelease = ObjectScope(storageFactory: AutoReleaseStorageFactory.init, description: "AutoRelease")
 
     /// Хранилище ссылок типа всегда новый экземпляр
     @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
-    public static let alwaysNewInstance = ObjectScope(storageFactory: AlwaysNewInstanceStorageFactory.init, description: "AlwaysNewInstance")
+    static let alwaysNewInstance = ObjectScope(storageFactory: AlwaysNewInstanceStorageFactory.init, description: "AlwaysNewInstance")
 }
 
 // MARK: - StorageType + ObjectScope

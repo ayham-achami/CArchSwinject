@@ -13,14 +13,28 @@ private extension Resolver {
     }
 }
 
+// MARK: - DIResolver + Resolver
+private extension DIResolver {
+    
+    var project: Resolver {
+        self as! Resolver // swiftlint:disable:this force_cast
+    }
+}
+
 // MARK: - Container + Registration check
 private extension Container {
     
-    func registerIfNeeded<Object>(_: Object.Type, name: String? = nil, factory: @escaping (Resolver) -> Object) -> ServiceEntry<Object>? {
+    func registerIfNeeded<Object>(_: Object.Type,
+                                  name: String? = nil,
+                                  factory: @escaping (DIResolver) -> Object,
+                                  completed: ((DIResolver, Object) -> Void)?) -> ServiceEntry<Object>? {
         guard
             !hasAnyRegistration(of: Object.self, name: name)
         else { return nil }
-        return register(Object.self, name: name, factory: factory)
+        guard
+            let completed
+        else { return register(Object.self, name: name, factory: { factory($0.project) }) }
+        return register(Object.self, name: name, factory: { factory($0.project) }).initCompleted { completed($0.project, $1) }
     }
 }
 
@@ -28,34 +42,40 @@ private extension Container {
 extension Container: BusinessLogicRegistrar {
     
     public func recordAgent<Agent>(_: Agent.Type,
-                                   factory: @escaping (CArch.DIResolver) -> Agent) where Agent: CArch.BusinessLogicAgent {
-        registerIfNeeded(Agent.self) { factory($0.project) }?.inObjectScope(.autoRelease)
+                                   factory: @escaping (CArch.DIResolver) -> Agent,
+                                   completed: ((DIResolver, Agent) -> Void)?) where Agent: CArch.BusinessLogicAgent {
+        registerIfNeeded(Agent.self, factory: factory, completed: completed)?.inObjectScope(.autoRelease)
     }
     
     public func recordService<Service>(_: Service.Type,
-                                       factory: @escaping (CArch.DIResolver) -> Service) where Service: CArch.BusinessLogicService {
-        registerIfNeeded(Service.self) { factory($0.project) }?.inObjectScope(.autoRelease)
+                                       factory: @escaping (CArch.DIResolver) -> Service,
+                                       completed: ((DIResolver, Service) -> Void)?) where Service: CArch.BusinessLogicService {
+        registerIfNeeded(Service.self, factory: factory, completed: completed)?.inObjectScope(.autoRelease)
     }
     
     public func recordEngine<Engine>(_: Engine.Type,
-                                     factory: @escaping (CArch.DIResolver) -> Engine) where Engine: CArch.BusinessLogicEngine {
-        registerIfNeeded(Engine.self) { factory($0.project) }?.inObjectScope(.autoRelease)
+                                     factory: @escaping (CArch.DIResolver) -> Engine,
+                                     completed: ((DIResolver, Engine) -> Void)?) where Engine: CArch.BusinessLogicEngine {
+        registerIfNeeded(Engine.self, factory: factory, completed: completed)?.inObjectScope(.autoRelease)
     }
     
     public func recordEngine<Engine>(_: Engine.Type,
                                      configuration: CArch.EngineConfiguration,
-                                     factory: @escaping (CArch.DIResolver) -> Engine) where Engine: CArch.BusinessLogicEngine {
-        registerIfNeeded(Engine.self, name: configuration.rawValue) { factory($0.project) }?.inObjectScope(.autoRelease)
+                                     factory: @escaping (CArch.DIResolver) -> Engine,
+                                     completed: ((DIResolver, Engine) -> Void)?) where Engine: CArch.BusinessLogicEngine {
+        registerIfNeeded(Engine.self, name: configuration.rawValue, factory: factory, completed: completed)?.inObjectScope(.autoRelease)
     }
     
     public func recordPool<Pool>(_: Pool.Type,
-                                 factory: @escaping (CArch.DIResolver) -> Pool) where Pool: CArch.BusinessLogicServicePool {
-        registerIfNeeded(Pool.self) { factory($0.project) }?.inObjectScope(.autoRelease)
+                                 factory: @escaping (CArch.DIResolver) -> Pool,
+                                 completed: ((DIResolver, Pool) -> Void)?) where Pool: CArch.BusinessLogicServicePool {
+        registerIfNeeded(Pool.self, factory: factory, completed: completed)?.inObjectScope(.autoRelease)
     }
     
     public func recordSingleton<Singleton>(_: Singleton.Type,
-                                           factory: @escaping (CArch.DIResolver) -> Singleton) where Singleton: CArch.BusinessLogicSingleton {
-        registerIfNeeded(Singleton.self) { factory($0.project) }?.inObjectScope(.singleton)
+                                           factory: @escaping (CArch.DIResolver) -> Singleton,
+                                           completed: ((DIResolver, Singleton) -> Void)?) where Singleton: CArch.BusinessLogicSingleton {
+        registerIfNeeded(Singleton.self, factory: factory, completed: completed)?.inObjectScope(.singleton)
     }
 }
 
@@ -91,9 +111,21 @@ extension Container: ModuleComponentRegistrar {
 // MARK: - Container + DIRegistrar
 extension Container: DIRegistrar {
     
-    public func record<Service>(some _: Service.Type, inScope storage: StorageType, configuration: (any InjectConfiguration)?, factory: @escaping (DIResolver) -> Service) {
-        let entry = register(Service.self, name: configuration?.rawValue) { resolver -> Service in
-            factory(resolver.project)
+    public func record<Service>(some _: Service.Type,
+                                inScope storage: StorageType,
+                                configuration: (any InjectConfiguration)?,
+                                factory: @escaping (DIResolver) -> Service,
+                                completed: ((DIResolver, Service) -> Void)?) {
+        let entry = if let completed {
+            register(Service.self, name: configuration?.rawValue) { resolver -> Service in
+                factory(resolver.project)
+            }.initCompleted {
+                completed($0.project, $1)
+            }
+        } else {
+            register(Service.self, name: configuration?.rawValue) { resolver -> Service in
+                factory(resolver.project)
+            }
         }
         switch storage {
         case .fleeting:
