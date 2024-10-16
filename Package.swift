@@ -28,7 +28,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/realm/SwiftLint", from: "0.55.1"),
-        .package(url: "https://github.com/Swinject/Swinject.git", exact: "2.8.7"),
+        .package(url: "https://github.com/Swinject/Swinject.git", exact: "2.9.1"),
         .package(url: "https://github.com/ayham-achami/CArch.git", branch: "release/3.1.0"),
         .package(url: "https://github.com/apple/swift-syntax.git", from: "510.0.2"),
         .package(url: "https://github.com/Swinject/SwinjectStoryboard.git", from: "2.2.2")

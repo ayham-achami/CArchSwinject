@@ -9,7 +9,7 @@ import SwinjectStoryboard
 
 /// Фабрика создания и внедрение зависимости
 @available(*, deprecated, message: "Use LayoutAssemblyFactory")
-public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, SwinjectStoryboardProtocol {
+public class StoryboardAssemblyFactory: NSObject, StoryboardDIAssemblyFactory, SwinjectStoryboardProtocol, @unchecked Sendable {
     
     public static func set(isDebugEnabled: Bool) {
         Container.loggingFunction = isDebugEnabled ? { print($0) } : nil

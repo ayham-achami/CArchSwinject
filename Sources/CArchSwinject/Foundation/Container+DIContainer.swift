@@ -21,9 +21,21 @@ private extension DIResolver {
     }
 }
 
+// MARK: - Container + Sendable
+extension Container: @unchecked Sendable {}
+
 // MARK: - Container + Registration check
 private extension Container {
     
+    /// При необходимости зарегистрирует объект в контейнере зависимости, если объект уже
+    /// существует или объект с таким же конфигурацией регистрации
+    /// уже существует,то игнорируется действие регистрации.
+    /// - Parameters:
+    ///   - object: Объект для регистрации
+    ///   - name: Конфигурация регистрации
+    ///   - factory: Блок содержащий код реализующий логику инициализация объекта
+    ///   - completed: Замыкание завершения инициализации
+    /// - Returns: `ServiceEntry<Object>?` Представляет запись зарегистрированного типа
     func registerIfNeeded<Object>(_: Object.Type,
                                   name: String? = nil,
                                   factory: @escaping (DIResolver) -> Object,
