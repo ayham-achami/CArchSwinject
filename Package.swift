@@ -30,8 +30,7 @@ let package = Package(
         .package(url: "https://github.com/realm/SwiftLint", from: "0.55.1"),
         .package(url: "https://github.com/Swinject/Swinject.git", exact: "2.9.1"),
         .package(url: "https://github.com/ayham-achami/CArch.git", from: "3.1.0"),
-        .package(url: "https://github.com/apple/swift-syntax.git", from: "510.0.2"),
-        .package(url: "https://github.com/Swinject/SwinjectStoryboard.git", from: "2.2.2")
+        .package(url: "https://github.com/apple/swift-syntax.git", from: "510.0.2")
     ],
     targets: [
         .macro(
@@ -50,7 +49,6 @@ let package = Package(
             dependencies: [
                 "CArch",
                 "Swinject",
-                "SwinjectStoryboard",
                 "CArchSwinjectMacros"
             ],
             plugins: [
@@ -81,7 +79,8 @@ let package = Package(
     swiftLanguageVersions: [.v5]
 )
 
-let defaultSettings: [SwiftSetting] = [.enableExperimentalFeature("StrictConcurrency=minimal")]
+let defaultSettings: [SwiftSetting] = [.enableExperimentalFeature("StrictConcurrency=minimal"),
+                                       .define("DEBUG", .when(configuration: .debug))]
 package.targets.forEach { target in
     if var settings = target.swiftSettings, !settings.isEmpty {
         settings.append(contentsOf: defaultSettings)

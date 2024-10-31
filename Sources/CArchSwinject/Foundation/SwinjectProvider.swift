@@ -14,11 +14,11 @@ final class SwinjectProvider {
                                       toService entry: Swinject.ServiceEntry<Service>,
                                       withName name: String?) {
             guard Container.loggingFunction != nil else { return }
-            print("Did register type \(String(describing: Type.self))",
+            print("[DI Provider]",
+                  "Did register type \(String(describing: Type.self))",
                   "with: \(entry)",
                   "name: \(String(describing: name))",
-                  "into container",
-                  container)
+                  "into container", "\n", container)
         }
     }
     
@@ -28,14 +28,7 @@ final class SwinjectProvider {
     
     /// Инициализации
     init() {
-        self.container = .init(behaviors: [ProviderBehavior()])
-    }
-    
-    /// Инициализации
-    /// - Parameter container: Контейнер внедрения зависимостей
-    @available(*, deprecated, message: "Use init()")
-    init(parentContainer: Container) {
-        self.container = parentContainer
+        self.container = .init(defaultObjectScope: .graph, behaviors: [ProviderBehavior()])
     }
     
     /// Применим сборщик к контейнеру
