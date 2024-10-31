@@ -15,9 +15,8 @@ final class SwinjectProvider {
                                       withName name: String?) {
             guard Container.loggingFunction != nil else { return }
             print("[DI Provider]",
-                  "Did register type \(String(describing: Type.self))",
-                  "with: \(entry)",
-                  "name: \(String(describing: name))",
+                  "Did register \(String(describing: Type.self))",
+                  "Configuration: \(String(describing: name))",
                   "into container", "\n", container)
         }
     }
