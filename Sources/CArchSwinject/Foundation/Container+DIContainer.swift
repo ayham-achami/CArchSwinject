@@ -43,6 +43,20 @@ private extension Container {
         guard
             !hasAnyRegistration(of: Object.self, name: name)
         else { return nil }
+        return register(Object.self, name: name, factory: factory, completed: completed)
+    }
+    
+    /// Зарегистрирует объект в контейнере зависимости, если объект уже существует, то добавляется новая регистрации.
+    /// - Parameters:
+    ///   - object: Объект для регистрации
+    ///   - name: Конфигурация регистрации
+    ///   - factory: Блок содержащий код реализующий логику инициализация объекта
+    ///   - completed: Замыкание завершения инициализации
+    /// - Returns: `ServiceEntry<Object>?` Представляет запись зарегистрированного типа
+    private func register<Object>(_: Object.Type,
+                                  name: String? = nil,
+                                  factory: @escaping (DIResolver) -> Object,
+                                  completed: ((DIResolver, Object) -> Void)?) -> ServiceEntry<Object>? {
         guard
             let completed
         else { return register(Object.self, name: name, factory: { factory($0.project) }) }
@@ -126,28 +140,21 @@ extension Container: DIRegistrar {
     public func record<Service>(some _: Service.Type,
                                 inScope storage: StorageType,
                                 configuration: (any InjectConfiguration)?,
+                                shouldCheckRegistration: Bool,
                                 factory: @escaping (DIResolver) -> Service,
                                 completed: ((DIResolver, Service) -> Void)?) {
-        let entry = if let completed {
-            register(Service.self, name: configuration?.rawValue) { resolver -> Service in
-                factory(resolver.project)
-            }.initCompleted {
-                completed($0.project, $1)
-            }
+        let entry = if shouldCheckRegistration {
+            registerIfNeeded(Service.self, name: configuration?.rawValue, factory: factory, completed: completed)
         } else {
-            register(Service.self, name: configuration?.rawValue) { resolver -> Service in
-                factory(resolver.project)
-            }
+            register(Service.self, name: configuration?.rawValue, factory: factory, completed: completed)
         }
         switch storage {
         case .fleeting:
-            entry.inObjectScope(.fleeting)
+            entry?.inObjectScope(.fleeting)
         case .singleton:
-            entry.inObjectScope(.singleton)
+            entry?.inObjectScope(.singleton)
         case .autoRelease:
-            entry.inObjectScope(.autoRelease)
-        case .alwaysNewInstance:
-            preconditionFailure("Try to use deprecated storage alwaysNewInstance")
+            entry?.inObjectScope(.autoRelease)
         }
     }
     
@@ -166,8 +173,6 @@ extension Container: DIRegistrar {
             entry.inObjectScope(.singleton)
         case .autoRelease:
             entry.inObjectScope(.autoRelease)
-        case .alwaysNewInstance:
-            preconditionFailure("Try to use deprecated storage alwaysNewInstance")
         }
     }
     

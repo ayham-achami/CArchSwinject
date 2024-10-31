@@ -97,10 +97,6 @@ extension ObjectScope {
 
     /// Хранилище ссылок типа автоматическое освобождение
     static let autoRelease = ObjectScope(storageFactory: AutoReleaseStorageFactory.init, description: "AutoRelease")
-
-    /// Хранилище ссылок типа всегда новый экземпляр
-    @available(*, deprecated, message: "This feature has be deprecated and will be removed in future release")
-    static let alwaysNewInstance = ObjectScope(storageFactory: AlwaysNewInstanceStorageFactory.init, description: "AlwaysNewInstance")
 }
 
 // MARK: - StorageType + ObjectScope
@@ -116,8 +112,6 @@ extension StorageType {
             return .singleton
         case .autoRelease:
             return .autoRelease
-        case .alwaysNewInstance:
-            return .alwaysNewInstance
         }
     }
 }
