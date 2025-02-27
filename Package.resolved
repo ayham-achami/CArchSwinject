@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ayham-achami/CArch.git",
       "state" : {
-        "revision" : "319d71788d85a9ace0807892b6d58059408b65a6",
-        "version" : "3.1.1"
+        "branch" : "feature/add-PresentationLogicManager",
+        "revision" : "de38509ea206d312ac44ed95a8fc93aa6f34fdc1"
       }
     },
     {
