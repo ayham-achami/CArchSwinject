@@ -29,7 +29,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/realm/SwiftLint", from: "0.55.1"),
         .package(url: "https://github.com/Swinject/Swinject.git", exact: "2.9.1"),
-        .package(url: "https://github.com/ayham-achami/CArch.git", from: "3.1.1"),
+        .package(url: "https://github.com/ayham-achami/CArch.git", from: "3.1.2"),
         .package(url: "https://github.com/apple/swift-syntax.git", from: "510.0.2")
     ],
     targets: [

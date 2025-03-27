@@ -103,6 +103,12 @@ extension Container: BusinessLogicRegistrar {
                                            completed: ((DIResolver, Singleton) -> Void)?) where Singleton: CArch.BusinessLogicSingleton {
         registerIfNeeded(Singleton.self, factory: factory, completed: completed)?.inObjectScope(.singleton)
     }
+    
+    public func recordManager<Manager>(_: Manager.Type,
+                                       factory: @escaping (any DIResolver) -> Manager,
+                                       completed: ((any DIResolver, Manager) -> Void)?) where Manager: PresentationLogicManager {
+        registerIfNeeded(Manager.self, factory: factory, completed: completed)?.inObjectScope(.autoRelease)
+    }
 }
 
 // MARK: - Container + ModuleComponentRegistrar
@@ -243,6 +249,10 @@ extension Container: BusinessLogicResolver {
     
     public func unravelSingleton<Singleton>(_: Singleton.Type) -> Singleton where Singleton: CArch.BusinessLogicSingleton {
         synchronize().resolve(Lazy<Singleton>.self)!.instance
+    }
+    
+    public func unravelManager<Manager>(_: Manager.Type) -> Manager where Manager: PresentationLogicManager {
+        synchronize().resolve(Lazy<Manager>.self)!.instance
     }
 }
 
