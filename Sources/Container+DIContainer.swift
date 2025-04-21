@@ -28,7 +28,7 @@ import Swinject
 
 // MARK: - Container + DIRegistrar
 extension Container: DIRegistrar {
-
+    
     // swiftlint:disable force_cast
     public func record<Service>(_ serviceType: Service.Type,
                                 name: String,
@@ -36,7 +36,8 @@ extension Container: DIRegistrar {
                                 factory: @escaping (DIResolver) -> Service) {
         register(serviceType, name: name) { resolver -> Service in
             factory(resolver as! DIResolver)
-        }.inObjectScope(storage.scope)
+        }
+        .inObjectScope(storage.scope)
     }
 
     public func record<Service>(_ serviceType: Service.Type,
@@ -44,7 +45,8 @@ extension Container: DIRegistrar {
                                 factory: @escaping (DIResolver) -> Service) {
         register(serviceType) { resolver -> Service in
             factory(resolver as! DIResolver)
-        }.inObjectScope(storage.scope)
+        }
+        .inObjectScope(storage.scope)
     }
 
     public func record<Service, Arg>(_ serviceType: Service.Type,
@@ -52,7 +54,8 @@ extension Container: DIRegistrar {
                                      factory: @escaping (DIResolver, Arg) -> Service) {
         register(serviceType) { (resolver, arg: Arg) -> Service in
             factory(resolver as! DIResolver, arg)
-        }.inObjectScope(storage.scope)
+        }
+        .inObjectScope(storage.scope)
     }
 
     public func record<Service, Arg1, Arg2>(_ serviceType: Service.Type,
@@ -60,7 +63,29 @@ extension Container: DIRegistrar {
                                             factory: @escaping (DIResolver, Arg1, Arg2) -> Service) {
         register(serviceType) { (resolver, arg1: Arg1, arg2: Arg2) -> Service in
             factory(resolver as! DIResolver, arg1, arg2)
-        }.inObjectScope(storage.scope)
+        }
+        .inObjectScope(storage.scope)
+    }
+    
+    public func recordService<Service>(_ serviceType: Service.Type,
+                                       name: String,
+                                       inScope storage: StorageType,
+                                       factory: @escaping (DIResolver) -> Service) {
+        guard !hasAnyRegistration(of: serviceType, name: name) || storage == .alwaysNewInstance else { return }
+        register(serviceType, name: name) { resolver -> Service in
+            factory(resolver as! DIResolver)
+        }
+        .inObjectScope(storage.scope)
+    }
+    
+    public func recordService<Service>(_ serviceType: Service.Type,
+                                       inScope storage: StorageType,
+                                       factory: @escaping (DIResolver) -> Service) {
+        guard !hasAnyRegistration(of: serviceType) || storage == .alwaysNewInstance else { return }
+        register(serviceType) { resolver -> Service in
+            factory(resolver as! DIResolver)
+        }
+        .inObjectScope(storage.scope)
     }
     // swiftlint:enable force_cast
 }

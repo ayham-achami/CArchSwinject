@@ -5,8 +5,8 @@
         "package": "CArch",
         "repositoryURL": "https://github.com/ayham-achami/CArch.git",
         "state": {
-          "branch": "mainline",
-          "revision": "88477e31d28046a85eefeccabafcf84fb642dfac",
+          "branch": "feature/sdk",
+          "revision": "a76edce87102125ef61e498b87443aa8c3de2f1b",
           "version": null
         }
       },
