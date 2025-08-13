@@ -21,13 +21,17 @@ final class SwinjectProvider {
         }
     }
     
+    private let originalContainer: Container
+    
     /// Контейнер внедрения зависимостей, в котором хранятся регистрации сервисов.
     /// и извлекает зарегистрированные сервисы с введенными зависимостями.
+    /// Для тредобезопасности (запись/регистрация и чтение/поиск из разных тредов) контейнер сделан синхронным.
     let container: Container
     
     /// Инициализации
     init() {
-        self.container = .init(defaultObjectScope: .graph, behaviors: [ProviderBehavior()])
+        self.originalContainer = .init(defaultObjectScope: .graph, behaviors: [ProviderBehavior()])
+        self.container = self.originalContainer.synchronize() as! Container // swiftlint:disable:this force_cast
     }
     
     /// Применим сборщик к контейнеру
