@@ -13,32 +13,30 @@ public final class LayoutAssemblyFactory: LayoutDIAssemblyFactory {
         Container.loggingFunction = isDebugEnabled ? { print($0) } : nil
     }
     
-    static private let provider = Atomic<SwinjectProvider>(.init())
+    static private let provider = SwinjectProvider()
     
     public var layoutContainer: DIContainer {
-        Self.provider.read { $0.container }
+        Self.provider.container
     }
     
     public var registrar: DIRegistrar {
-        Self.provider.read { $0.container }
+        Self.provider.container
     }
     
     public var resolver: DIResolver {
-        Self.provider.read { $0.container }
+        Self.provider.container
     }
     
     public init() {}
     
     public func assembly<Module>(_ module: Module) -> Module where Module: LayoutModuleAssembly {
-        Self.provider.read { $0.apply(LayoutModuleApplying(module)) }
+        Self.provider.apply(LayoutModuleApplying(module))
         return module
     }
     
     public func record<Recorder>(_ recorder: Recorder) where Recorder: DIAssemblyCollection {
-        Self.provider.read { provider in
-            recorder.services.forEach { service in
-                provider.apply(ServicesApplying(service))
-            }
+        recorder.services.forEach { service in
+            Self.provider.apply(ServicesApplying(service))
         }
     }
 }
@@ -83,71 +81,5 @@ extension LayoutAssemblyFactory {
     /// - Returns: Объект получение модуля из контейнера зависимости
     public func assembly<Module>(_: Module.Type) -> Resolver<Module> {
         .init(factory: self)
-    }
-}
-
-// MARK: - LayoutAssemblyFactory + Atomic
-extension LayoutAssemblyFactory {
-    
-    final class Atomic<T>: @unchecked Sendable {
-        
-        private var value: T
-        private let unfairLock: os_unfair_lock_t
-        
-        /// Инициализация
-        /// - Parameter value: Атомарное значение
-        init(_ value: T) {
-            self.value = value
-            self.unfairLock = .allocate(capacity: 1)
-            self.unfairLock.initialize(to: os_unfair_lock())
-        }
-        
-        deinit {
-            unfairLock.deinitialize(count: 1)
-            unfairLock.deallocate()
-        }
-        
-        /// Синхронно прочитать или преобразовать содержащееся значение.
-        /// - Parameter closure: Замыкание
-        /// - Returns: Нужное значение
-        func read<U>(_ closure: @Sendable (T) throws -> U) rethrows -> U {
-            try around { try closure(self.value) }
-        }
-        
-        /// Синхронно изменить защищенное значение.
-        /// - Parameter closure: Замыкание
-        /// - Returns: Нужное значение
-        @discardableResult
-        func write<U>(_ closure: @Sendable (inout T) throws -> U) rethrows -> U {
-            try around { try closure(&self.value) }
-        }
-        
-        /// Выполняет замыкание, возвращая значение и синхронизировать обращение.
-        /// - Parameter closure: Замыкание
-        /// - Returns: Нужное значение
-        private func around<U>(_ closure: @Sendable () throws -> U) rethrows -> U {
-            lock()
-            defer { unlock() }
-            return try closure()
-        }
-        
-        /// Выполняет замыкание, возвращая значение и синхронизировать обращение.
-        /// - Parameter closure: Замыкание
-        /// - Returns: Нужное значение
-        private func around<U>(_ closure: @Sendable () async throws -> U) async rethrows -> U {
-            lock()
-            defer { unlock() }
-            return try await closure()
-        }
-        
-        /// Блокировать доступ к значению
-        private func lock() {
-            os_unfair_lock_lock(unfairLock)
-        }
-        
-        /// Разблокировать доступ к значению
-        private func unlock() {
-            os_unfair_lock_unlock(unfairLock)
-        }
     }
 }
