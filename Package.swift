@@ -27,10 +27,10 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/realm/SwiftLint", from: "0.55.1"),
+        .package(url: "https://github.com/realm/SwiftLint", exact: "0.59.1"),
         .package(url: "https://github.com/Swinject/Swinject.git", exact: "2.9.1"),
-        .package(url: "https://github.com/ayham-achami/CArch.git", from: "3.1.2"),
-        .package(url: "https://github.com/apple/swift-syntax.git", from: "510.0.2")
+        .package(url: "https://github.com/ayham-achami/CArch.git", from: "3.2.0"),
+        .package(url: "https://github.com/swiftlang/swift-syntax.git", from: "601.0.0")
     ],
     targets: [
         .macro(
